@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Opdracht16_Machtsverheffing_JC", "Opdracht16_Machtsverheffing_JC.csproj", "{CB3F8237-E4D4-4A88-988A-A0A4F6575D88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB3F8237-E4D4-4A88-988A-A0A4F6575D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB3F8237-E4D4-4A88-988A-A0A4F6575D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB3F8237-E4D4-4A88-988A-A0A4F6575D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB3F8237-E4D4-4A88-988A-A0A4F6575D88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42914E8A-A6A0-4868-A16F-82E210310198}
+	EndGlobalSection
+EndGlobal

@@ -50,6 +50,7 @@
             this.BtnBereken.TabIndex = 0;
             this.BtnBereken.Text = "&Bereken";
             this.BtnBereken.UseVisualStyleBackColor = true;
+            this.BtnBereken.Click += new System.EventHandler(this.BtnBereken_Click);
             // 
             // BtnWissen
             // 
