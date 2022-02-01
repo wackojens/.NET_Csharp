@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSparen));
             this.BtnBereken = new System.Windows.Forms.Button();
             this.BtnWissen = new System.Windows.Forms.Button();
             this.BtnSluiten = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.TxtWeekgeld = new System.Windows.Forms.TextBox();
-            this.TxtVerhoging = new System.Windows.Forms.TextBox();
-            this.TxtSpaarbedrag = new System.Windows.Forms.TextBox();
-            this.TxtResultaat = new System.Windows.Forms.TextBox();
-            this.LblWeekgeld = new System.Windows.Forms.Label();
-            this.LblVerhoging = new System.Windows.Forms.Label();
             this.LblSpaarbedrag = new System.Windows.Forms.Label();
+            this.TxtSpaarbedrag = new System.Windows.Forms.TextBox();
+            this.LblVerhoging = new System.Windows.Forms.Label();
+            this.TxtVerhoging = new System.Windows.Forms.TextBox();
+            this.LblWeekgeld = new System.Windows.Forms.Label();
+            this.TxtWeekgeld = new System.Windows.Forms.TextBox();
+            this.TxtResultaat = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,24 +81,19 @@
             this.panel1.Controls.Add(this.TxtVerhoging);
             this.panel1.Controls.Add(this.LblWeekgeld);
             this.panel1.Controls.Add(this.TxtWeekgeld);
-            this.panel1.Location = new System.Drawing.Point(12, 305);
+            this.panel1.Location = new System.Drawing.Point(12, 293);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 121);
             this.panel1.TabIndex = 3;
             // 
-            // TxtWeekgeld
+            // LblSpaarbedrag
             // 
-            this.TxtWeekgeld.Location = new System.Drawing.Point(200, 16);
-            this.TxtWeekgeld.Name = "TxtWeekgeld";
-            this.TxtWeekgeld.Size = new System.Drawing.Size(100, 22);
-            this.TxtWeekgeld.TabIndex = 0;
-            // 
-            // TxtVerhoging
-            // 
-            this.TxtVerhoging.Location = new System.Drawing.Point(200, 47);
-            this.TxtVerhoging.Name = "TxtVerhoging";
-            this.TxtVerhoging.Size = new System.Drawing.Size(100, 22);
-            this.TxtVerhoging.TabIndex = 1;
+            this.LblSpaarbedrag.AutoSize = true;
+            this.LblSpaarbedrag.Location = new System.Drawing.Point(39, 81);
+            this.LblSpaarbedrag.Name = "LblSpaarbedrag";
+            this.LblSpaarbedrag.Size = new System.Drawing.Size(144, 16);
+            this.LblSpaarbedrag.TabIndex = 7;
+            this.LblSpaarbedrag.Text = "Gewenste spaarbedrag:";
             // 
             // TxtSpaarbedrag
             // 
@@ -105,23 +101,6 @@
             this.TxtSpaarbedrag.Name = "TxtSpaarbedrag";
             this.TxtSpaarbedrag.Size = new System.Drawing.Size(100, 22);
             this.TxtSpaarbedrag.TabIndex = 2;
-            // 
-            // TxtResultaat
-            // 
-            this.TxtResultaat.Location = new System.Drawing.Point(12, 451);
-            this.TxtResultaat.Multiline = true;
-            this.TxtResultaat.Name = "TxtResultaat";
-            this.TxtResultaat.Size = new System.Drawing.Size(318, 135);
-            this.TxtResultaat.TabIndex = 4;
-            // 
-            // LblWeekgeld
-            // 
-            this.LblWeekgeld.AutoSize = true;
-            this.LblWeekgeld.Location = new System.Drawing.Point(114, 19);
-            this.LblWeekgeld.Name = "LblWeekgeld";
-            this.LblWeekgeld.Size = new System.Drawing.Size(69, 16);
-            this.LblWeekgeld.TabIndex = 5;
-            this.LblWeekgeld.Text = "Weekgeld:";
             // 
             // LblVerhoging
             // 
@@ -132,14 +111,36 @@
             this.LblVerhoging.TabIndex = 6;
             this.LblVerhoging.Text = "Wekelijkse verhoging:";
             // 
-            // LblSpaarbedrag
+            // TxtVerhoging
             // 
-            this.LblSpaarbedrag.AutoSize = true;
-            this.LblSpaarbedrag.Location = new System.Drawing.Point(39, 81);
-            this.LblSpaarbedrag.Name = "LblSpaarbedrag";
-            this.LblSpaarbedrag.Size = new System.Drawing.Size(144, 16);
-            this.LblSpaarbedrag.TabIndex = 7;
-            this.LblSpaarbedrag.Text = "Gewenste spaarbedrag:";
+            this.TxtVerhoging.Location = new System.Drawing.Point(200, 47);
+            this.TxtVerhoging.Name = "TxtVerhoging";
+            this.TxtVerhoging.Size = new System.Drawing.Size(100, 22);
+            this.TxtVerhoging.TabIndex = 1;
+            // 
+            // LblWeekgeld
+            // 
+            this.LblWeekgeld.AutoSize = true;
+            this.LblWeekgeld.Location = new System.Drawing.Point(114, 19);
+            this.LblWeekgeld.Name = "LblWeekgeld";
+            this.LblWeekgeld.Size = new System.Drawing.Size(69, 16);
+            this.LblWeekgeld.TabIndex = 5;
+            this.LblWeekgeld.Text = "Weekgeld:";
+            // 
+            // TxtWeekgeld
+            // 
+            this.TxtWeekgeld.Location = new System.Drawing.Point(200, 16);
+            this.TxtWeekgeld.Name = "TxtWeekgeld";
+            this.TxtWeekgeld.Size = new System.Drawing.Size(100, 22);
+            this.TxtWeekgeld.TabIndex = 0;
+            // 
+            // TxtResultaat
+            // 
+            this.TxtResultaat.Location = new System.Drawing.Point(12, 451);
+            this.TxtResultaat.Multiline = true;
+            this.TxtResultaat.Name = "TxtResultaat";
+            this.TxtResultaat.Size = new System.Drawing.Size(318, 135);
+            this.TxtResultaat.TabIndex = 4;
             // 
             // FrmSparen
             // 
@@ -153,6 +154,7 @@
             this.Controls.Add(this.BtnWissen);
             this.Controls.Add(this.BtnBereken);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSparen";
             this.Text = "Sparen";
             this.panel1.ResumeLayout(false);
