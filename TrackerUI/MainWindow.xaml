@@ -1,0 +1,30 @@
+﻿<Window x:Name="TournamentWindow" x:Class="TrackerUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrackerUI"
+        mc:Ignorable="d"
+        Title="Tournament viewer" Height="485" Width="667" FontSize="16" Icon="/5918143_football_sitemap_soccer_sport_tournament_icon.png" MinWidth="667" MinHeight="485" MaxWidth="900" MaxHeight="700">
+    <Grid RenderTransformOrigin="0.449,0.493">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="347*"/>
+            <ColumnDefinition Width="320*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="LblTournament" Content="Tournament:" HorizontalAlignment="Left" Margin="31,24,0,0" VerticalAlignment="Top" Height="49" Width="172" Foreground="#FF3399FF" FontSize="28"/>
+        <Label x:Name="LblTournamentName" Content="&lt;none&gt;" HorizontalAlignment="Left" Margin="203,24,0,0" VerticalAlignment="Top" Height="49" Width="217" Foreground="#FF3399FF" FontSize="28" Grid.ColumnSpan="2"/>
+        <Label x:Name="LblRound" Content="Round" HorizontalAlignment="Left" Margin="31,98,0,0" VerticalAlignment="Top" Height="37" Width="73" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65"/>
+        <ComboBox x:Name="ComboboxRound" Margin="117,103,35,0" Height="27" VerticalAlignment="Top"/>
+        <CheckBox x:Name="CheckBoxUnplayed" Content="Unplayed only" HorizontalAlignment="Left" Margin="117,152,0,0" VerticalAlignment="Top" Foreground="#FF3399FF" FontSize="20" BorderBrush="#FF3399FF" Height="26" Width="147"/>
+        <ListBox x:Name="ListBoxMatchup" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="34,198,33,43"/>
+        <Label x:Name="LblTeam1" Content="&lt;Team 1&gt;" Margin="30,197,0,0" VerticalAlignment="Top" Height="37" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65" HorizontalAlignment="Left" Width="102" Grid.Column="1"/>
+        <Label x:Name="LblScoreTeam1" Content="Score" Margin="5,235,0,0" VerticalAlignment="Top" Height="37" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65" Grid.Column="1" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="TxtTeam1Score" Margin="81,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="29" HorizontalAlignment="Left" Width="120" Grid.Column="1"/>
+        <Label x:Name="LblTeam2" Content="&lt;Team 2&gt;" HorizontalAlignment="Left" Margin="30,350,0,0" VerticalAlignment="Top" Height="38" Width="102" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65" Grid.Column="1"/>
+        <Label x:Name="LblScoreTeam2" Content="Score" Margin="5,393,0,0" VerticalAlignment="Top" Height="37" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65" Grid.Column="1" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="TxtTeam2Score" HorizontalAlignment="Left" Margin="81,397,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="20" Height="29" Grid.Column="1"/>
+        <Label x:Name="LblVersus" Content="-VS-" Margin="111,294,0,0" VerticalAlignment="Top" Height="37" Foreground="#FF3399FF" FontSize="20" RenderTransformOrigin="0.502,0.65" HorizontalAlignment="Left" Width="60" Grid.Column="1"/>
+        <Button x:Name="BtnScore" Content="Score" Margin="194,288,0,0" VerticalAlignment="Top" Height="48" FontSize="20" Foreground="#FF3399FF" HorizontalAlignment="Left" Width="104" Grid.Column="1" Background="White"/>
+
+    </Grid>
+</Window>
