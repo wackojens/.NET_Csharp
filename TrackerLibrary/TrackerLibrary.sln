@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackerLibrary", "TrackerLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerUI", "..\TrackerUI\TrackerUI.csproj", "{4F63AF0E-0BCB-4523-8DD9-0F58104C2028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "..\WinFormsUI\WinFormsUI.csproj", "{72B41AE2-C317-4C15-8D30-497AC72509B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "..\WinFormsUI\WinFormsUI.csproj", "{028DA850-7E92-41A2-BE14-DDE14B4DF742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{4F63AF0E-0BCB-4523-8DD9-0F58104C2028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F63AF0E-0BCB-4523-8DD9-0F58104C2028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F63AF0E-0BCB-4523-8DD9-0F58104C2028}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72B41AE2-C317-4C15-8D30-497AC72509B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72B41AE2-C317-4C15-8D30-497AC72509B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72B41AE2-C317-4C15-8D30-497AC72509B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72B41AE2-C317-4C15-8D30-497AC72509B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028DA850-7E92-41A2-BE14-DDE14B4DF742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028DA850-7E92-41A2-BE14-DDE14B4DF742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028DA850-7E92-41A2-BE14-DDE14B4DF742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028DA850-7E92-41A2-BE14-DDE14B4DF742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
