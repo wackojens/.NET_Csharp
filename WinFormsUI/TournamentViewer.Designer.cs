@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTournamentViewer));
             this.LblTournament = new System.Windows.Forms.Label();
             this.LblTournamentName = new System.Windows.Forms.Label();
             this.LblRound = new System.Windows.Forms.Label();
@@ -181,9 +182,9 @@
             this.BtnScore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.BtnScore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnScore.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnScore.Location = new System.Drawing.Point(361, 469);
+            this.BtnScore.Location = new System.Drawing.Point(358, 447);
             this.BtnScore.Name = "BtnScore";
-            this.BtnScore.Size = new System.Drawing.Size(87, 34);
+            this.BtnScore.Size = new System.Drawing.Size(69, 56);
             this.BtnScore.TabIndex = 13;
             this.BtnScore.Text = "Score";
             this.BtnScore.UseVisualStyleBackColor = true;
@@ -210,6 +211,7 @@
             this.Controls.Add(this.LblTournament);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "FrmTournamentViewer";
             this.Text = "Tournament viewer";

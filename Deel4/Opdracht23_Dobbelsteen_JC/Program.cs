@@ -1,4 +1,4 @@
-namespace WinFormsUI
+namespace Opdracht23_Dobbelsteen_JC
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace WinFormsUI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrmTournamentDashboard());
+            Application.Run(new FrmDobbelsteen());
         }
     }
 }
