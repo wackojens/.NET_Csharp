@@ -1,3 +1,5 @@
+using TrackerLibrary;
+
 namespace WinFormsUI
 {
     internal static class Program
@@ -11,7 +13,12 @@ namespace WinFormsUI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrmTournamentDashboard());
+
+            // Initialize the database connections
+            TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.TextFile);
+            Application.Run(new FrmCreatePrize());
+
+            //Application.Run(new FrmTournamentDashboard());
         }
     }
 }

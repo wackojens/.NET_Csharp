@@ -36,15 +36,15 @@
             this.SelectTeamMemberDropDown = new System.Windows.Forms.ComboBox();
             this.LblSelectTeamMember = new System.Windows.Forms.Label();
             this.PlayerGroupBox = new System.Windows.Forms.GroupBox();
-            this.TxtFirstName = new System.Windows.Forms.TextBox();
-            this.LblFirstName = new System.Windows.Forms.Label();
-            this.TxtLastName = new System.Windows.Forms.TextBox();
-            this.LblLastName = new System.Windows.Forms.Label();
-            this.TxtEmail = new System.Windows.Forms.TextBox();
-            this.LblEmail = new System.Windows.Forms.Label();
+            this.BtnCreatePlayer = new System.Windows.Forms.Button();
             this.TxtPhoneNumber = new System.Windows.Forms.TextBox();
             this.LblPhoneNumber = new System.Windows.Forms.Label();
-            this.BtnCreatePlayer = new System.Windows.Forms.Button();
+            this.TxtEmail = new System.Windows.Forms.TextBox();
+            this.LblEmail = new System.Windows.Forms.Label();
+            this.TxtLastName = new System.Windows.Forms.TextBox();
+            this.LblLastName = new System.Windows.Forms.Label();
+            this.TxtFirstName = new System.Windows.Forms.TextBox();
+            this.LblFirstName = new System.Windows.Forms.Label();
             this.TeamMembersListBox = new System.Windows.Forms.ListBox();
             this.BtnRemoveSelectedPlayer = new System.Windows.Forms.Button();
             this.BtnCancelCreateTeam = new System.Windows.Forms.Button();
@@ -135,59 +135,21 @@
             this.PlayerGroupBox.TabStop = false;
             this.PlayerGroupBox.Text = "Add new player";
             // 
-            // TxtFirstName
+            // BtnCreatePlayer
             // 
-            this.TxtFirstName.Location = new System.Drawing.Point(151, 43);
-            this.TxtFirstName.Name = "TxtFirstName";
-            this.TxtFirstName.Size = new System.Drawing.Size(179, 43);
-            this.TxtFirstName.TabIndex = 25;
-            // 
-            // LblFirstName
-            // 
-            this.LblFirstName.AutoSize = true;
-            this.LblFirstName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblFirstName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.LblFirstName.Location = new System.Drawing.Point(6, 40);
-            this.LblFirstName.Name = "LblFirstName";
-            this.LblFirstName.Size = new System.Drawing.Size(139, 37);
-            this.LblFirstName.TabIndex = 24;
-            this.LblFirstName.Text = "First name";
-            // 
-            // TxtLastName
-            // 
-            this.TxtLastName.Location = new System.Drawing.Point(151, 99);
-            this.TxtLastName.Name = "TxtLastName";
-            this.TxtLastName.Size = new System.Drawing.Size(179, 43);
-            this.TxtLastName.TabIndex = 27;
-            // 
-            // LblLastName
-            // 
-            this.LblLastName.AutoSize = true;
-            this.LblLastName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblLastName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.LblLastName.Location = new System.Drawing.Point(6, 96);
-            this.LblLastName.Name = "LblLastName";
-            this.LblLastName.Size = new System.Drawing.Size(137, 37);
-            this.LblLastName.TabIndex = 26;
-            this.LblLastName.Text = "Last name";
-            // 
-            // TxtEmail
-            // 
-            this.TxtEmail.Location = new System.Drawing.Point(151, 155);
-            this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.Size = new System.Drawing.Size(179, 43);
-            this.TxtEmail.TabIndex = 29;
-            // 
-            // LblEmail
-            // 
-            this.LblEmail.AutoSize = true;
-            this.LblEmail.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblEmail.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.LblEmail.Location = new System.Drawing.Point(6, 152);
-            this.LblEmail.Name = "LblEmail";
-            this.LblEmail.Size = new System.Drawing.Size(82, 37);
-            this.LblEmail.TabIndex = 28;
-            this.LblEmail.Text = "Email";
+            this.BtnCreatePlayer.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtnCreatePlayer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.BtnCreatePlayer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.BtnCreatePlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCreatePlayer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnCreatePlayer.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.BtnCreatePlayer.Location = new System.Drawing.Point(98, 266);
+            this.BtnCreatePlayer.Name = "BtnCreatePlayer";
+            this.BtnCreatePlayer.Size = new System.Drawing.Size(133, 34);
+            this.BtnCreatePlayer.TabIndex = 24;
+            this.BtnCreatePlayer.Text = "create player";
+            this.BtnCreatePlayer.UseVisualStyleBackColor = true;
+            this.BtnCreatePlayer.Click += new System.EventHandler(this.BtnCreatePlayer_Click);
             // 
             // TxtPhoneNumber
             // 
@@ -207,20 +169,59 @@
             this.LblPhoneNumber.TabIndex = 30;
             this.LblPhoneNumber.Text = "Cellphone";
             // 
-            // BtnCreatePlayer
+            // TxtEmail
             // 
-            this.BtnCreatePlayer.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtnCreatePlayer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.BtnCreatePlayer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.BtnCreatePlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCreatePlayer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnCreatePlayer.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.BtnCreatePlayer.Location = new System.Drawing.Point(98, 266);
-            this.BtnCreatePlayer.Name = "BtnCreatePlayer";
-            this.BtnCreatePlayer.Size = new System.Drawing.Size(133, 34);
-            this.BtnCreatePlayer.TabIndex = 24;
-            this.BtnCreatePlayer.Text = "create player";
-            this.BtnCreatePlayer.UseVisualStyleBackColor = true;
+            this.TxtEmail.Location = new System.Drawing.Point(151, 155);
+            this.TxtEmail.Name = "TxtEmail";
+            this.TxtEmail.Size = new System.Drawing.Size(179, 43);
+            this.TxtEmail.TabIndex = 29;
+            // 
+            // LblEmail
+            // 
+            this.LblEmail.AutoSize = true;
+            this.LblEmail.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblEmail.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.LblEmail.Location = new System.Drawing.Point(6, 152);
+            this.LblEmail.Name = "LblEmail";
+            this.LblEmail.Size = new System.Drawing.Size(82, 37);
+            this.LblEmail.TabIndex = 28;
+            this.LblEmail.Text = "Email";
+            // 
+            // TxtLastName
+            // 
+            this.TxtLastName.Location = new System.Drawing.Point(151, 99);
+            this.TxtLastName.Name = "TxtLastName";
+            this.TxtLastName.Size = new System.Drawing.Size(179, 43);
+            this.TxtLastName.TabIndex = 27;
+            // 
+            // LblLastName
+            // 
+            this.LblLastName.AutoSize = true;
+            this.LblLastName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblLastName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.LblLastName.Location = new System.Drawing.Point(6, 96);
+            this.LblLastName.Name = "LblLastName";
+            this.LblLastName.Size = new System.Drawing.Size(137, 37);
+            this.LblLastName.TabIndex = 26;
+            this.LblLastName.Text = "Last name";
+            // 
+            // TxtFirstName
+            // 
+            this.TxtFirstName.Location = new System.Drawing.Point(151, 43);
+            this.TxtFirstName.Name = "TxtFirstName";
+            this.TxtFirstName.Size = new System.Drawing.Size(179, 43);
+            this.TxtFirstName.TabIndex = 25;
+            // 
+            // LblFirstName
+            // 
+            this.LblFirstName.AutoSize = true;
+            this.LblFirstName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblFirstName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.LblFirstName.Location = new System.Drawing.Point(6, 40);
+            this.LblFirstName.Name = "LblFirstName";
+            this.LblFirstName.Size = new System.Drawing.Size(139, 37);
+            this.LblFirstName.TabIndex = 24;
+            this.LblFirstName.Text = "First name";
             // 
             // TeamMembersListBox
             // 

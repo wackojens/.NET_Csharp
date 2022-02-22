@@ -56,7 +56,7 @@
             // 
             // TxtPlaceNumber
             // 
-            this.TxtPlaceNumber.Location = new System.Drawing.Point(210, 88);
+            this.TxtPlaceNumber.Location = new System.Drawing.Point(238, 91);
             this.TxtPlaceNumber.Name = "TxtPlaceNumber";
             this.TxtPlaceNumber.Size = new System.Drawing.Size(179, 35);
             this.TxtPlaceNumber.TabIndex = 27;
@@ -74,10 +74,11 @@
             // 
             // TxtPrizePercentage
             // 
-            this.TxtPrizePercentage.Location = new System.Drawing.Point(210, 331);
+            this.TxtPrizePercentage.Location = new System.Drawing.Point(238, 334);
             this.TxtPrizePercentage.Name = "TxtPrizePercentage";
             this.TxtPrizePercentage.Size = new System.Drawing.Size(179, 35);
             this.TxtPrizePercentage.TabIndex = 29;
+            this.TxtPrizePercentage.Text = "0";
             // 
             // LblPrizePercentage
             // 
@@ -86,16 +87,17 @@
             this.LblPrizePercentage.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.LblPrizePercentage.Location = new System.Drawing.Point(26, 328);
             this.LblPrizePercentage.Name = "LblPrizePercentage";
-            this.LblPrizePercentage.Size = new System.Drawing.Size(178, 37);
+            this.LblPrizePercentage.Size = new System.Drawing.Size(214, 37);
             this.LblPrizePercentage.TabIndex = 28;
-            this.LblPrizePercentage.Text = "Place number";
+            this.LblPrizePercentage.Text = "Price percentage";
             // 
             // TxtPrizeAmount
             // 
-            this.TxtPrizeAmount.Location = new System.Drawing.Point(210, 196);
+            this.TxtPrizeAmount.Location = new System.Drawing.Point(238, 199);
             this.TxtPrizeAmount.Name = "TxtPrizeAmount";
             this.TxtPrizeAmount.Size = new System.Drawing.Size(179, 35);
             this.TxtPrizeAmount.TabIndex = 31;
+            this.TxtPrizeAmount.Text = "0";
             // 
             // LblPrizeAmount
             // 
@@ -110,7 +112,7 @@
             // 
             // TxtPlaceName
             // 
-            this.TxtPlaceName.Location = new System.Drawing.Point(210, 142);
+            this.TxtPlaceName.Location = new System.Drawing.Point(238, 145);
             this.TxtPlaceName.Name = "TxtPlaceName";
             this.TxtPlaceName.Size = new System.Drawing.Size(179, 35);
             this.TxtPlaceName.TabIndex = 33;
@@ -145,7 +147,7 @@
             this.BtnCancelCreatePrize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancelCreatePrize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnCancelCreatePrize.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.BtnCancelCreatePrize.Location = new System.Drawing.Point(210, 432);
+            this.BtnCancelCreatePrize.Location = new System.Drawing.Point(269, 432);
             this.BtnCancelCreatePrize.Name = "BtnCancelCreatePrize";
             this.BtnCancelCreatePrize.Size = new System.Drawing.Size(148, 40);
             this.BtnCancelCreatePrize.TabIndex = 36;
@@ -166,13 +168,14 @@
             this.BtnCreatePrize.TabIndex = 35;
             this.BtnCreatePrize.Text = "Create prize";
             this.BtnCreatePrize.UseVisualStyleBackColor = true;
+            this.BtnCreatePrize.Click += new System.EventHandler(this.BtnCreatePrize_Click);
             // 
             // FrmCreatePrize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(450, 514);
+            this.ClientSize = new System.Drawing.Size(510, 514);
             this.Controls.Add(this.BtnCancelCreatePrize);
             this.Controls.Add(this.BtnCreatePrize);
             this.Controls.Add(this.LblOr);
