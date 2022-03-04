@@ -95,6 +95,7 @@
             this.BtnAddPlayer.TabIndex = 22;
             this.BtnAddPlayer.Text = "Add player";
             this.BtnAddPlayer.UseVisualStyleBackColor = true;
+            this.BtnAddPlayer.Click += new System.EventHandler(this.BtnAddPlayer_Click);
             // 
             // SelectTeamMemberDropDown
             // 
@@ -246,6 +247,7 @@
             this.BtnRemoveSelectedPlayer.TabIndex = 25;
             this.BtnRemoveSelectedPlayer.Text = "Remove selected";
             this.BtnRemoveSelectedPlayer.UseVisualStyleBackColor = true;
+            this.BtnRemoveSelectedPlayer.Click += new System.EventHandler(this.BtnRemoveSelectedPlayer_Click);
             // 
             // BtnCancelCreateTeam
             // 
@@ -276,6 +278,7 @@
             this.BtnCreateTeam.TabIndex = 26;
             this.BtnCreateTeam.Text = "Create team";
             this.BtnCreateTeam.UseVisualStyleBackColor = true;
+            this.BtnCreateTeam.Click += new System.EventHandler(this.BtnCreateTeam_Click);
             // 
             // FrmCreateTeam
             // 

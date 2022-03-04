@@ -1,0 +1,14 @@
+CREATE PROCEDURE dbo.spTournament_Prizes_Insert 
+	@Tournament_id int,
+	@Prize_id int,
+	@id int = 0 output
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	insert into dbo.Tournaments_Prizes(Tournament_id, Prize_id)
+	values (@Tournament_id, @Prize_id)
+
+	select @id = SCOPE_IDENTITY();
+END
+GO

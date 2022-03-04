@@ -14,9 +14,41 @@ namespace WinFormsUI
 {
     public partial class FrmCreateTeam : Form
     {
-        public FrmCreateTeam()
+        private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
+        private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+        private ITeamRequester callingForm;
+
+        public FrmCreateTeam(ITeamRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
+
+            //CreateSampleData();
+
+            WireUpLists();
+        }
+
+        private void CreateSampleData()
+        {
+            availableTeamMembers.Add(new PersonModel { FirstName = "Jens", LastName = "Coomans" });
+            availableTeamMembers.Add(new PersonModel { FirstName = "Snej", LastName = "Snamooc" });
+
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Jen", LastName = "Cooman" });
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Nej", LastName = "Namooc" });
+        }
+
+        private void WireUpLists()
+        {
+            SelectTeamMemberDropDown.DataSource = null;
+
+            SelectTeamMemberDropDown.DataSource = availableTeamMembers;
+            SelectTeamMemberDropDown.DisplayMember = "FullName";
+
+            TeamMembersListBox.DataSource = null;
+
+            TeamMembersListBox.DataSource = selectedTeamMembers;
+            TeamMembersListBox.DisplayMember = "FullName";
         }
 
         private void BtnCreatePlayer_Click(object sender, EventArgs e)
@@ -30,7 +62,16 @@ namespace WinFormsUI
                 p.EmailAdress = TxtEmail.Text;
                 p.CellphoneNumber = TxtPhoneNumber.Text;
 
-                GlobalConfig.Connection.CreatePerson(p);
+                p = GlobalConfig.Connection.CreatePerson(p);
+
+                selectedTeamMembers.Add(p);
+
+                WireUpLists();
+
+                TxtFirstName.Text = "";
+                TxtLastName.Text = "";
+                TxtEmail.Text = "";
+                TxtPhoneNumber.Text = "";
             }
             else
             {
@@ -61,6 +102,46 @@ namespace WinFormsUI
             }
 
             return true;
+        }
+
+        private void BtnAddPlayer_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)SelectTeamMemberDropDown.SelectedItem;
+
+            if (p != null)
+            {
+                availableTeamMembers.Remove(p);
+                selectedTeamMembers.Add(p);
+
+                WireUpLists();
+            }
+        }
+
+        private void BtnRemoveSelectedPlayer_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)TeamMembersListBox.SelectedItem;
+
+            if (p != null)
+            {
+                selectedTeamMembers.Remove(p);
+                availableTeamMembers.Add(p);
+
+                WireUpLists();
+            }
+        }
+
+        private void BtnCreateTeam_Click(object sender, EventArgs e)
+        {
+            TeamModel t = new TeamModel();
+
+            t.TeamName = TxtTeamName.Text;
+            t.TeamMembers = selectedTeamMembers;
+
+            GlobalConfig.Connection.CreateTeam(t);
+
+            callingForm.TeamComplete(t);
+
+            this.Close();
         }
     }
 }

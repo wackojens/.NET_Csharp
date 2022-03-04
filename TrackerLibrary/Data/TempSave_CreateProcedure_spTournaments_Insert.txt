@@ -1,0 +1,14 @@
+CREATE PROCEDURE dbo.spTournaments_Insert
+	@TournamentName nvarchar (50),
+	@EntryFee decimal(18,0),
+	@id int = 0 output
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	insert into dbo.Tournaments ( TournamentName, EntryFee)
+	values ( @TournamentName, @EntryFee);
+
+	select @id = SCOPE_IDENTITY();
+END
+GO

@@ -15,9 +15,12 @@ namespace WinFormsUI
 {
     public partial class FrmCreatePrize : Form
     {
-        public FrmCreatePrize()
+        IPrizeRequester callingForm;
+        public FrmCreatePrize(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
         }
 
         private void BtnCreatePrize_Click(object sender, EventArgs e)
@@ -32,10 +35,14 @@ namespace WinFormsUI
 
                 GlobalConfig.Connection.CreatePrize(model);
 
-                TxtPlaceName.Clear();
-                TxtPlaceNumber.Clear();
-                TxtPrizeAmount.Text = "0";
-                TxtPrizePercentage.Text = "0";
+                callingForm.PrizeComplete(model);
+
+                this.Close();
+
+                //TxtPlaceName.Text = "";
+                //TxtPlaceNumber.Text = "";
+                //TxtPrizeAmount.Text = "0";
+                //TxtPrizePercentage.Text = "0";
             }
             else
             {

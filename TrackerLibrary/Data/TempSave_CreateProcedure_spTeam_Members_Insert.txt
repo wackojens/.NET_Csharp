@@ -1,0 +1,14 @@
+CREATE PROCEDURE spTeam_Members_Insert
+	@Team_id int,
+	@Person_id int,
+	@id int = 0 output
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	insert into dbo.Team_Members(Team_id, Person_id)
+	values (@Team_id, @Person_id);
+
+	select @id = SCOPE_IDENTITY();
+END
+GO

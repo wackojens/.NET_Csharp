@@ -1,0 +1,14 @@
+CREATE PROCEDURE dbo.spTeam_Members_GetByTeam
+	@Team_id int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT p.*
+	from dbo.Team_Members m
+	inner join dbo.People p on m.Person_id = p.id
+	where m.Team_id = @Team_id
+
+END
+GO

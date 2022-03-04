@@ -1,0 +1,13 @@
+Wrong table name: dbo.Macthup_Entries => dbo.Matchup_Entries (or even better imo: dbo.MatchupEntries)
+
+Wrong column name in dbo.Teams: Name => TeamName
+
+No TournamentId column in dbo.Matchups + TournamentId = FK
+
+WinnerId in dbo.Matchups should be nullable
+
+Refrain from using underscore in Table and column names (personal pref + keep it same as video and program)
+
+score column in dbo.Macthup_Entries: int => float and score => Score
+
+TeamCompeting in dbo.Macthup_Entries should be nullable

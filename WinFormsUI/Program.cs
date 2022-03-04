@@ -16,7 +16,7 @@ namespace WinFormsUI
 
             // Initialize the database connections
             TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.TextFile);
-            Application.Run(new FrmCreatePrize());
+            Application.Run(new FrmCreateTournament());
 
             //Application.Run(new FrmTournamentDashboard());
         }

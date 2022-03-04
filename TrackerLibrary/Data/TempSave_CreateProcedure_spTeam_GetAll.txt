@@ -1,0 +1,10 @@
+CREATE PROCEDURE dbo.spTeam_GetAll
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT *
+	from dbo.Teams;
+
+END
+GO

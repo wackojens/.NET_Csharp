@@ -1,0 +1,15 @@
+CREATE PROCEDURE dbo.spMacthup_Entries_Insert
+	@Matchup_id int,
+	@ParentMatchup_id int,
+	@TeamCompeting_id int,
+	@id int = 0 output
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	insert into dbo.Macthup_Entries (Matchup_id, ParentMatchup_id, TeamCompeting_id)
+	values (@Matchup_id, @ParentMatchup_id, @TeamCompeting_id);
+
+	select @id = SCOPE_IDENTITY();
+END
+GO
