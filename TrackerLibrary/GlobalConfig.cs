@@ -43,8 +43,12 @@ namespace TrackerLibrary
 }
 
 
+// les van 08/03/2022 in school vergeten naar git te pushen. toen tot 16:59 geraakt.
+// nu snel terug op dat punt geraken. Indien errors wss ergens iets gemist tussen 16:12 en 16:45(na 16:45 terug rustig gekeken)
+
 // 16:12:13
 
 // laatste aanpassing in video gebeurt 16:05:16(SaveMatchupToFile)
 
 // MatchupEntrymodel (ParentMatchup en TeamCompeting nullable gemaakt. Niet in video!)
+// MatchupModel winner nullable gemaakt. Niet in video!
