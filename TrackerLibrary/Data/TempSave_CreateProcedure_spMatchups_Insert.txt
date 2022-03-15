@@ -1,5 +1,5 @@
 CREATE PROCEDURE dbo.spMatchups_Insert
-	@TournamentId int,
+	@Tournament_id int,
 	@MatchupRound int,
 	@id int = 0 output
 AS
@@ -7,7 +7,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	insert into dbo.Matchups (TournamentId, MatchupRound)
-	values (@TournamentId, @MatchupRound);
+	values (@Tournament_id, @MatchupRound);
 
 	select @id = SCOPE_IDENTITY();
 END

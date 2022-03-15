@@ -1,0 +1,14 @@
+CREATE PROCEDURE dbo.spTeam_GetByTournament
+	@Tournament_id int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	select t.*
+	from dbo.Teams t
+	inner join dbo.Tournaments_Entries e on t.id = e.Team_id
+	where e.Tournament_id = @Tournament_id
+END
+GO

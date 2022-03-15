@@ -1,0 +1,13 @@
+CREATE PROCEDURE dbo.spMatchupEntries_GetByMatchup
+	@Matchup_id int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	select *
+	from dbo.Macthup_Entries
+	where Matchup_id = @Matchup_id
+END
+GO

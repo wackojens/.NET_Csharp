@@ -1,0 +1,14 @@
+CREATE PROCEDURE dbo.spMatchups_GetByTournament
+	@Tournament_id int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	select m.*
+	from dbo.Matchups m
+	where m.TournamentId = @Tournament_id
+	order by MatchupRound;
+END
+GO

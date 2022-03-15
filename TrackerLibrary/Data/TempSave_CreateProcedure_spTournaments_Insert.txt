@@ -6,8 +6,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	insert into dbo.Tournaments ( TournamentName, EntryFee)
-	values ( @TournamentName, @EntryFee);
+	insert into dbo.Tournaments ( TournamentName, EntryFee, Active)
+	values ( @TournamentName, @EntryFee, 1);
 
 	select @id = SCOPE_IDENTITY();
 END
