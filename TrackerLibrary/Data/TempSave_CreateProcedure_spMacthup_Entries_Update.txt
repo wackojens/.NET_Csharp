@@ -1,0 +1,13 @@
+CREATE PROCEDURE dbo.spMacthup_Entries_Update
+	@id int,
+	@TeamCompeting_id int = null,
+	@Score float = null
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	update dbo.Macthup_Entries
+	set TeamCompeting_id = @TeamCompeting_id, Score = @Score
+	where id = @id;
+END
+GO

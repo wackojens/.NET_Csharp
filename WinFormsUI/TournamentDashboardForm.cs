@@ -34,5 +34,12 @@ namespace WinFormsUI
             FrmCreateTournament frm = new FrmCreateTournament();
             frm.Show();
         }
+
+        private void BtnLoadTournament_Click(object sender, EventArgs e)
+        {
+            TournamentModel tm = (TournamentModel)LoadTournamentDropDown.SelectedItem;
+            FrmTournamentViewer frm = new FrmTournamentViewer(tm);
+            frm.Show();
+        }
     }
 }

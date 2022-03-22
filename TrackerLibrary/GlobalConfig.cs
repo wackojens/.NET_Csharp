@@ -43,7 +43,9 @@ namespace TrackerLibrary
 }
 
 
-// 17:56:40
+// 20:56:00
+
+// 18:43:20 wordt de code in TournamentViewer aangepast voor een bug weg te werken die ik zelf niet heb. Mijn code is dus niet veranderd.
 
 // MatchupEntrymodel (ParentMatchup en TeamCompeting nullable gemaakt. Niet in video!)
 // MatchupModel winner nullable gemaakt. Niet in video!

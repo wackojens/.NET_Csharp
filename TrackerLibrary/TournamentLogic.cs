@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,64 @@ namespace TrackerLibrary
             model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
 
             CreateOtherRounds(model, rounds);
+        }
+
+        public static void UpdateTournamentResults(TournamentModel model)
+        {
+            List<MatchupModel> toScore = new List<MatchupModel>();
+
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel rm in round)
+                {
+                    if (rm.Winner == null && (rm.Entries.Any(x => x.Score != 0) || rm.Entries.Count == 1))
+                    {
+                        toScore.Add(rm);
+                    }
+                }
+            }
+
+            ScoreMatchups(toScore);
+
+
+            //foreach (List<MatchupModel> round in model.Rounds)
+            //{
+            //    foreach (MatchupModel rm in round)
+            //    {
+            //        foreach (MatchupEntryModel me in rm.Entries)
+            //        {
+            //            if (me.ParentMatchup != null)
+            //            {
+            //                if (me.ParentMatchup.Id == m.Id)
+            //                {
+            //                    me.TeamCompeting = m.Winner;
+            //                    GlobalConfig.Connection.updateMatchup(rm);
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //}
+
+            //GlobalConfig.Connection.updateMatchup(m);
+        }
+
+        private static void ScoreMatchups(List<MatchupModel> models)
+        {
+            // greater or lesser
+            string scoreDirection = ConfigurationManager.AppSettings["winnerDetermination"];
+            //if (teamOneScore > teamTwoScore)
+            //{
+            //    m.Winner = m.Entries[0].TeamCompeting;
+            //}
+            //else if (teamOneScore < teamTwoScore)
+            //{
+            //    m.Winner = m.Entries[1].TeamCompeting;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("I do not handle tie games.");
+            //}
         }
 
         private static void CreateOtherRounds(TournamentModel model, int rounds)

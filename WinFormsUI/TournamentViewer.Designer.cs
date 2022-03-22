@@ -34,12 +34,12 @@
             this.LblRound = new System.Windows.Forms.Label();
             this.RoundDropDown = new System.Windows.Forms.ComboBox();
             this.UnplayedCheckBox = new System.Windows.Forms.CheckBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.MatchupListBox = new System.Windows.Forms.ListBox();
             this.LblTeam1 = new System.Windows.Forms.Label();
             this.LblScoreTeam1 = new System.Windows.Forms.Label();
             this.TxtScoreTeam1 = new System.Windows.Forms.TextBox();
             this.TxtScoreTeam2 = new System.Windows.Forms.TextBox();
-            this.ScoreTeam2 = new System.Windows.Forms.Label();
+            this.LblScoreTeam2 = new System.Windows.Forms.Label();
             this.LblTeam2 = new System.Windows.Forms.Label();
             this.LblVersus = new System.Windows.Forms.Label();
             this.BtnScore = new System.Windows.Forms.Button();
@@ -85,6 +85,7 @@
             this.RoundDropDown.Name = "RoundDropDown";
             this.RoundDropDown.Size = new System.Drawing.Size(208, 38);
             this.RoundDropDown.TabIndex = 3;
+            this.RoundDropDown.SelectedIndexChanged += new System.EventHandler(this.RoundDropDown_SelectedIndexChanged);
             // 
             // UnplayedCheckBox
             // 
@@ -96,15 +97,17 @@
             this.UnplayedCheckBox.TabIndex = 4;
             this.UnplayedCheckBox.Text = "Unplayed only";
             this.UnplayedCheckBox.UseVisualStyleBackColor = true;
+            this.UnplayedCheckBox.CheckedChanged += new System.EventHandler(this.UnplayedCheckBox_CheckedChanged);
             // 
-            // listBox1
+            // MatchupListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 30;
-            this.listBox1.Location = new System.Drawing.Point(26, 199);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(308, 304);
-            this.listBox1.TabIndex = 5;
+            this.MatchupListBox.FormattingEnabled = true;
+            this.MatchupListBox.ItemHeight = 30;
+            this.MatchupListBox.Location = new System.Drawing.Point(26, 199);
+            this.MatchupListBox.Name = "MatchupListBox";
+            this.MatchupListBox.Size = new System.Drawing.Size(308, 304);
+            this.MatchupListBox.TabIndex = 5;
+            this.MatchupListBox.SelectedIndexChanged += new System.EventHandler(this.MatchupListBox_SelectedIndexChanged);
             // 
             // LblTeam1
             // 
@@ -142,16 +145,16 @@
             this.TxtScoreTeam2.Size = new System.Drawing.Size(100, 35);
             this.TxtScoreTeam2.TabIndex = 11;
             // 
-            // ScoreTeam2
+            // LblScoreTeam2
             // 
-            this.ScoreTeam2.AutoSize = true;
-            this.ScoreTeam2.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ScoreTeam2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.ScoreTeam2.Location = new System.Drawing.Point(532, 447);
-            this.ScoreTeam2.Name = "ScoreTeam2";
-            this.ScoreTeam2.Size = new System.Drawing.Size(82, 37);
-            this.ScoreTeam2.TabIndex = 10;
-            this.ScoreTeam2.Text = "Score";
+            this.LblScoreTeam2.AutoSize = true;
+            this.LblScoreTeam2.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblScoreTeam2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.LblScoreTeam2.Location = new System.Drawing.Point(532, 447);
+            this.LblScoreTeam2.Name = "LblScoreTeam2";
+            this.LblScoreTeam2.Size = new System.Drawing.Size(82, 37);
+            this.LblScoreTeam2.TabIndex = 10;
+            this.LblScoreTeam2.Text = "Score";
             // 
             // LblTeam2
             // 
@@ -188,6 +191,7 @@
             this.BtnScore.TabIndex = 13;
             this.BtnScore.Text = "Score";
             this.BtnScore.UseVisualStyleBackColor = true;
+            this.BtnScore.Click += new System.EventHandler(this.BtnScore_Click);
             // 
             // FrmTournamentViewer
             // 
@@ -198,12 +202,12 @@
             this.Controls.Add(this.BtnScore);
             this.Controls.Add(this.LblVersus);
             this.Controls.Add(this.TxtScoreTeam2);
-            this.Controls.Add(this.ScoreTeam2);
+            this.Controls.Add(this.LblScoreTeam2);
             this.Controls.Add(this.LblTeam2);
             this.Controls.Add(this.TxtScoreTeam1);
             this.Controls.Add(this.LblScoreTeam1);
             this.Controls.Add(this.LblTeam1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.MatchupListBox);
             this.Controls.Add(this.UnplayedCheckBox);
             this.Controls.Add(this.RoundDropDown);
             this.Controls.Add(this.LblRound);
@@ -227,12 +231,12 @@
         private Label LblRound;
         private ComboBox RoundDropDown;
         private CheckBox UnplayedCheckBox;
-        private ListBox listBox1;
+        private ListBox MatchupListBox;
         private Label LblTeam1;
         private Label LblScoreTeam1;
         private TextBox TxtScoreTeam1;
         private TextBox TxtScoreTeam2;
-        private Label ScoreTeam2;
+        private Label LblScoreTeam2;
         private Label LblTeam2;
         private Label LblVersus;
         private Button BtnScore;
