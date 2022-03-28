@@ -39,11 +39,16 @@ namespace TrackerLibrary
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
+
+        public static string AppKeyLookup(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
     }
 }
 
 
-// 20:56:00
+// 23:00:00
 
 // 18:43:20 wordt de code in TournamentViewer aangepast voor een bug weg te werken die ik zelf niet heb. Mijn code is dus niet veranderd.
 

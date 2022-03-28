@@ -137,6 +137,12 @@ namespace WinFormsUI
             //create all of the prize entries
             //create all of the team entries
             GlobalConfig.Connection.CreateTournament(tm);
+
+            tm.AlertUsersToNewRound();
+
+            FrmTournamentViewer frm = new FrmTournamentViewer(tm);
+            frm.Show();
+            this.Close();
         }
     }
 }

@@ -161,8 +161,45 @@ namespace WinFormsUI
             LoadMatchups();
         }
 
+        private string ValidateData()
+        {
+            string output = "";
+
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+
+            bool scoreOneValid = double.TryParse(TxtScoreTeam1.Text, out teamOneScore);
+            bool scoreTwoValid = double.TryParse(TxtScoreTeam2.Text, out teamTwoScore);
+
+            if (!scoreOneValid)
+            {
+                output = "The score of team one is not a valid number.";
+            }
+            else if (!scoreTwoValid)
+            {
+                output = "The score of team two is not a valid number.";
+            }
+            else if (teamOneScore == 0 && teamTwoScore == 0)
+            {
+                output = "You did not enter a score for either team.";
+            }
+            else if (teamOneScore == teamTwoScore)
+            {
+                output = "We do not allow ties in this application.";
+            }
+
+            return output;
+        }
+
         private void BtnScore_Click(object sender, EventArgs e)
         {
+            string errorMessage = ValidateData();
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show($"Input error: { errorMessage }");
+                return;
+            }
+
             MatchupModel m = (MatchupModel)MatchupListBox.SelectedItem;
             double teamOneScore = 0;
             double teamTwoScore = 0;
@@ -204,7 +241,15 @@ namespace WinFormsUI
                 }
             }
 
-            TournamentLogic.UpdateTournamentResults(tournament);
+            try
+            {
+                TournamentLogic.UpdateTournamentResults(tournament);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"The application had te following error: { ex.Message }");
+                return;
+            }
 
             LoadMatchups();
         }
