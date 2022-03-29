@@ -6,11 +6,39 @@
 }
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-black">
-    <img src="~/images/magnifying-glass.jpg" class="rounded-circle magnify float-end">
-</nav>
+
+<ul class="nav justify-content-end flex-sm-row">
+    <li class="nav-item">
+        <a data-bs-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search">
+            <img src="~/images/magnifying-glass.jpg" class="rounded-circle magnify">    
+        </a>
+    </li>
+    <li class="nav-item">
+        <img src="~/images/speech-bubble.jpg" class="rounded-circle navIcon">
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Log in</a>
+    </li>
+    <li class="nav-item">
+        <button type="button" class="btn btn-primary pillButton">Sign up</button>
+    </li>
+</ul>
 
 
-<div class="text-center">
-    <h1 class="display-4">9.5GAG</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="collapse" id="search">
+            <div class="input-group flex-nowrap searchbar float-end">
+                <span class="input-group-text bg-black" id="addon-wrapping">
+                    <img src="~/images/magnifying-glass.jpg" class="rounded-circle magnify">
+                </span>
+                <input type="text" class="form-control bg-dark text-white" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center">
+            <h1 class="display-4">9.5GAG</h1>
+        </div>
+    </div>
 </div>

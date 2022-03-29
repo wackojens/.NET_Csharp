@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+        ViewData["Title"] = "Register";
+}
+<div class="container-fluid">
+    <div class="text-center">
+        <h1 class="display-4">Register</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form>
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" style="margin-right:0px" id="firstName">First name</span>
+                <input type="text" class="form-control" aria-label="FirstName" aria-describedby="firstName">
+              </div>
+                <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" id="lastName">Last name</span>
+                <input type="text" class="form-control" aria-label="LastName" aria-describedby="lastName">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" id="birthdate">Birthdate</span>
+                <input type="date" class="form-control" aria-label="Birthdate" aria-describedby="birthdate">
+              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text bg-dark inputType" id="gender">Gender</span>
+                  <select class="form-select" id="genderSelect">
+                    <option selected>Choose...</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">X</option>
+                  </select>
+                </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" id="email">Email adress</span>
+                <input type="email" class="form-control" aria-label="Email" aria-describedby="email">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" id="userame">Username</span>
+                <input type="text" class="form-control" aria-label="Username" aria-describedby="username">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-dark inputType" id="password">Password</span>
+                <input type="password" class="form-control" aria-label="Password" aria-describedby="password">
+              </div>
+              <button type="submit" class="btn btn-primary float-end">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
