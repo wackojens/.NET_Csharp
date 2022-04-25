@@ -14,9 +14,7 @@
         public string Email { get; set; }
         public Dictionary<string, int> CourseResults { get; set; } = new();
 
-
-
-        public List<string> CourseIds = new();
+        public List<string> Courses = new();
 
         private static List<StudentModel> Students = new();
 
@@ -28,14 +26,41 @@
             Students.Add(new StudentModel() { FirstName = "Dario", LastName = "Van Hasselt", Birthdate = "20/02/2002", Gender = "Male", Township = "Mol", PostalCode = 2400, Address = "Dariostraat 202", PhoneNumber = "0496215487", Email = "Dario@Xerio.com" });
         }
 
-        public void AddCourse(string courseId)
-        {
-            CourseIds.Add(courseId);
-        }
+        //public void AddCourse(string courseId)
+        //{
+        //    Courses.Add(courseId);
+        //}
 
-        public void SetScore(string courseId, int score)
+        public void ShowScore(string courseId, int score)
         {
             CourseResults[courseId] = score;
+        }
+
+        public List<string> GetCourseNamesList()
+        {
+            List<string> courseNames = new();
+            List<CourseModel> allCourses = CourseModel.GetAll();
+
+            var courseList = from course in allCourses
+                             where Courses.Contains(course.Id)
+                             select course.CourseName;
+
+            foreach (string course in courseList)
+                courseNames.Add(course);
+
+            return courseNames;
+        }
+
+        public string StringCourseNames()
+        {
+            string courseNames = "";
+            string separator = ", ";
+            List<string> courseList = GetCourseNamesList();
+
+            foreach (string course in courseList)
+                courseNames += course + separator;
+            courseNames = courseNames.Trim(separator.ToCharArray());
+            return courseNames;
         }
 
         public static List<StudentModel> GetAll()
@@ -87,6 +112,7 @@
                     student.Address = newStudent.Address;
                     student.PhoneNumber = newStudent.PhoneNumber;
                     student.Email = newStudent.Email;
+                    student.Courses = newStudent.Courses;
                 }
             }
         }

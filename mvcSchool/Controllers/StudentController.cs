@@ -14,9 +14,11 @@ namespace mvcSchool.Controllers
         }
 
         // GET: StudentController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            StudentModel newStudent = StudentModel.GetStudent(id);
+            ViewData["courseNames"] = newStudent.StringCourseNames();
+            return View(newStudent);
         }
 
         // GET: StudentController/Create
@@ -47,6 +49,10 @@ namespace mvcSchool.Controllers
                 newStudent.Address = collection["Address"];
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
+                foreach (string courseId in collection["Courses"])
+                {
+                    newStudent.Courses.Add(courseId);
+                }
 
                 StudentModel.AddStudent(newStudent);
 
@@ -61,6 +67,9 @@ namespace mvcSchool.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(string id)
         {
+            List<CourseModel> courses = CourseModel.GetAll();
+            MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
+            ViewData["courses"] = coursesList;
             return View(StudentModel.GetStudent(id));
         }
 
@@ -83,6 +92,10 @@ namespace mvcSchool.Controllers
                 newStudent.Address = collection["Address"];
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
+                foreach (string courseId in collection["Courses"])
+                {
+                    newStudent.Courses.Add(courseId);
+                }
 
                 StudentModel.UpdateStudent(newStudent);
 
@@ -97,6 +110,7 @@ namespace mvcSchool.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(string id)
         {
+            
             StudentModel.Delete(id);
             return RedirectToAction(nameof(Index));
         }
