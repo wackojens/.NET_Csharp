@@ -17,7 +17,7 @@ namespace mvcSchool.Controllers
         public ActionResult Details(string id)
         {
             StudentModel newStudent = StudentModel.GetStudent(id);
-            ViewData["courseNames"] = newStudent.StringCourseNames();
+            //ViewData["courseNames"] = newStudent.StringCourseNames();
             return View(newStudent);
         }
 
@@ -49,10 +49,7 @@ namespace mvcSchool.Controllers
                 newStudent.Address = collection["Address"];
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
-                foreach (string courseId in collection["Courses"])
-                {
-                    newStudent.Courses.Add(courseId);
-                }
+                newStudent.Courses = collection["Courses"].ToList();
 
                 StudentModel.AddStudent(newStudent);
 
@@ -92,10 +89,7 @@ namespace mvcSchool.Controllers
                 newStudent.Address = collection["Address"];
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
-                foreach (string courseId in collection["Courses"])
-                {
-                    newStudent.Courses.Add(courseId);
-                }
+                newStudent.Courses = collection["Courses"].ToList();
 
                 StudentModel.UpdateStudent(newStudent);
 
@@ -110,7 +104,6 @@ namespace mvcSchool.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(string id)
         {
-            
             StudentModel.Delete(id);
             return RedirectToAction(nameof(Index));
         }
