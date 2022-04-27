@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseTeacher)
+                @Html.DisplayNameFor(model => /*model.CourseTeacher*/ model.Teacher)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.CourseName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CourseTeacher)
+                @Html.DisplayFor(modelItem => /*item.CourseTeacher*/ item.Teacher.FullName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

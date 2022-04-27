@@ -49,6 +49,7 @@ namespace mvcSchool.Controllers
                 newTeacher.PhoneNumber = collection["PhoneNumber"];
                 newTeacher.Email = collection["Email"];
                 newTeacher.Courses = collection["Courses"].ToList();
+                newTeacher.FullName = newTeacher.FirstName + " " + newTeacher.LastName;
 
                 TeacherModel.AddTeacher(newTeacher);
 
@@ -89,6 +90,7 @@ namespace mvcSchool.Controllers
                 newTeacher.PhoneNumber = collection["PhoneNumber"];
                 newTeacher.Email = collection["Email"];
                 newTeacher.Courses = collection["Courses"].ToList();
+                newTeacher.FullName = newTeacher.FirstName + " " + newTeacher.LastName;
 
                 TeacherModel.UpdateTeacher(newTeacher);
 

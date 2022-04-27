@@ -17,20 +17,20 @@
             @Html.DisplayFor(model => model.CourseName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CourseTeacher)
+            @Html.DisplayNameFor(model => /*model.CourseTeacher*/ model.Teacher)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CourseTeacher)
+            @Html.DisplayFor(model => /*model.CourseTeacher*/ model.Teacher.FullName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Students)
         </dt>
         <dd class = "col-sm-10">
             <form asp-action="Edit">
-                @foreach (string item in Model.Students)
+                @foreach (StudentModel item in Model.Students)
 			    {
-				    @Html.DisplayFor(model => item)
-                    <input name="@item.id" class="form-control" value="@item.score"/>
+				    @Html.DisplayFor(model => item.FullName)
+                    <input name="@item.Id" class="form-control" @*value="@item.CourseResults[Model.CourseName]"*@/>
 			    }
             </form>
         </dd>

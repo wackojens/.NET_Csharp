@@ -15,18 +15,17 @@ namespace mvcSchool.Models
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public Dictionary<string, int> CourseResults { get; set; } = new() { { "python", 10 },{ ".NET", 20 } };
+        public string FullName { get; set; }
+        public Dictionary<string, string> CourseResults { get; set; }/* = new Dictionary<string, string>() { { ".NET", "5" }, { "python","0" }, { "test", "" } };*/
 
         public List<string> Courses = new();
 
         private static List<StudentModel> Students = new();
 
-
-
         static StudentModel()
         {
-            Students.Add(new StudentModel() { FirstName = "Jens", LastName = "Coomans", Birthdate = "19/01/1990", Gender = "Male", Township = "Hechtel-Eksel", PostalCode = 3990, Address = "Klaverstraat 9", PhoneNumber = "0475/358177", Email = "Jens.Coomans@outlook.be"});
-            Students.Add(new StudentModel() { FirstName = "Dario", LastName = "Van Hasselt", Birthdate = "20/02/2002", Gender = "Male", Township = "Mol", PostalCode = 2400, Address = "Dariostraat 202", PhoneNumber = "0496/215487", Email = "Dario@xerio.com" });
+            Students.Add(new StudentModel() { FirstName = "Jens", LastName = "Coomans", Birthdate = "19/01/1990", Gender = "Male", Township = "Hechtel-Eksel", PostalCode = 3990, Address = "Klaverstraat 9", PhoneNumber = "0475/358177", Email = "Jens.Coomans@outlook.be", FullName = "Jens Coomans" });
+            Students.Add(new StudentModel() { FirstName = "Dario", LastName = "Van Hasselt", Birthdate = "20/02/2002", Gender = "Male", Township = "Mol", PostalCode = 2400, Address = "Dariostraat 202", PhoneNumber = "0496/215487", Email = "Dario@xerio.com", FullName = "Dario Van Hasselt" });
         }
 
         //public void AddCourse(string courseId)
@@ -131,6 +130,7 @@ namespace mvcSchool.Models
                     student.PhoneNumber = newStudent.PhoneNumber;
                     student.Email = newStudent.Email;
                     student.Courses = newStudent.Courses;
+                    student.FullName = newStudent.FullName;
                     break;
                 }
             }

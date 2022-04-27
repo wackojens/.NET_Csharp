@@ -16,7 +16,7 @@ namespace mvcSchool.Controllers
         public ActionResult Details(string id)
         {
             CourseModel newCourse = CourseModel.GetCourse(id);
-            newCourse.CourseTeacher = newCourse.GetTeacher();
+            /*newCourse.CourseTeacher = */newCourse.GetTeacher();
             newCourse.GetStudents();
             return View(newCourse);
         }

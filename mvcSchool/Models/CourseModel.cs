@@ -4,9 +4,10 @@
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string CourseName { get; set; }
-        public string CourseTeacher { get; set; }
+        //public string CourseTeacher { get; set; }
+        public TeacherModel Teacher { get; set; }
 
-        public List<string> Students = new();
+        public List<StudentModel> Students = new();
 
         public static List<CourseModel> Courses = new();
 
@@ -17,11 +18,10 @@
         }
         public static List<CourseModel> GetAll()
         {
-            foreach (var course in Courses)
-            { 
-                course.CourseTeacher = course.GetTeacher();
+            foreach (CourseModel course in Courses)
+            {
+               /* course.CourseTeacher = */course.GetTeacher();
             }
-
             return Courses;
         }
 
@@ -66,22 +66,31 @@
             }
         }
 
-        public string GetTeacher()
+        public /*string*/ void GetTeacher()
         {
             List<TeacherModel> allTeachers = TeacherModel.GetAll();
 
-            string name = allTeachers.Where(t => t.Courses.Contains(Id)).Select(t =>  t.FirstName + " " + t.LastName).FirstOrDefault();
-            if (name == null)
-                return "No teacher added.";
+            //string teacherName = allTeachers.Where(t => t.Courses.Contains(Id)).Select(t => t.FirstName + " " + t.LastName).FirstOrDefault();
+            //if (teacherName == null)
+            //    return "No teacher added.";
+            //string teacherId = allTeachers.Where(t => t.Courses.Contains(Id)).Select(t => t.Id).First();
 
-            return name;
+            //return teacherName;
+            Teacher = allTeachers.Where(t => t.Courses.Contains(Id)).Select(t => t).FirstOrDefault();
+            if (Teacher == null)
+            {
+                TeacherModel dummy = new();
+                dummy.FullName = "No teacher added.";
+                Teacher = dummy;
+            }
         }
 
         public void GetStudents()
         {
             List<StudentModel> allStudents = StudentModel.GetAll();
 
-            Students = allStudents.Where(s => s.Courses.Contains(Id)).Select(s => s.FirstName + " " + s.LastName).ToList();
+            //Students = allStudents.Where(s => s.Courses.Contains(Id)).Select(s => s.FirstName + " " + s.LastName).ToList();
+            Students = allStudents.Where(s => s.Courses.Contains(Id)).Select(s => s).ToList();
         }
     }
 }

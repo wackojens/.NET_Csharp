@@ -12,6 +12,7 @@
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public string FullName { get; set; }
 
         public List<string> Courses = new();
 
@@ -19,8 +20,8 @@
 
         static TeacherModel()
         {
-            Teachers.Add(new TeacherModel() { FirstName = "Bert", LastName = "Vriens", Birthdate = "01/01/1985", Gender = "Male", Township = "Heusden-Zolder", PostalCode = 3550, Address = "Bert baan 20", PhoneNumber = "0478/123456", Email = "BV@gmail.com" });
-            Teachers.Add(new TeacherModel() { FirstName = "Danny", LastName = "Drijvers", Birthdate = "01/01/1985", Gender = "Male", Township = "Houthalen-Helchteren", PostalCode = 3530, Address = "Danny dreef 15", PhoneNumber = "0497/987654", Email = "DannyD@hotmail.com" });
+            Teachers.Add(new TeacherModel() { FirstName = "Bert", LastName = "Vriens", Birthdate = "01/01/1985", Gender = "Male", Township = "Heusden-Zolder", PostalCode = 3550, Address = "Bert baan 20", PhoneNumber = "0478/123456", Email = "BV@gmail.com", FullName = "Bert Vriens" });
+            Teachers.Add(new TeacherModel() { FirstName = "Danny", LastName = "Drijvers", Birthdate = "01/01/1985", Gender = "Male", Township = "Houthalen-Helchteren", PostalCode = 3530, Address = "Danny dreef 15", PhoneNumber = "0497/987654", Email = "DannyD@hotmail.com", FullName = "Danny Drijvers" });
         }
 
         public static List<TeacherModel> GetAll()
@@ -73,6 +74,7 @@
                     teacher.PhoneNumber = newTeacher.PhoneNumber;
                     teacher.Email = newTeacher.Email;
                     teacher.Courses = newTeacher.Courses;
+                    teacher.FullName = newTeacher.FullName;
                     break;
                 }
             }

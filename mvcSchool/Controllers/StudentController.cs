@@ -50,6 +50,7 @@ namespace mvcSchool.Controllers
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
                 newStudent.Courses = collection["Courses"].ToList();
+                newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
 
                 StudentModel.AddStudent(newStudent);
 
@@ -90,6 +91,7 @@ namespace mvcSchool.Controllers
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
                 newStudent.Courses = collection["Courses"].ToList();
+                newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
 
                 StudentModel.UpdateStudent(newStudent);
 
