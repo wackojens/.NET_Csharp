@@ -51,6 +51,7 @@ namespace mvcSchool.Controllers
                 newStudent.Email = collection["Email"];
                 newStudent.Courses = collection["Courses"].ToList();
                 newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
+                newStudent.AddCourses();
 
                 StudentModel.AddStudent(newStudent);
 

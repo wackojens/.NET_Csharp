@@ -21,6 +21,27 @@ namespace mvcSchool.Controllers
             return View(newCourse);
         }
 
+        // POST: CourseController/Details/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details(string id, IFormCollection collection)
+        {
+            try
+            {
+                CourseModel newCourse = CourseModel.GetCourse(id);
+                foreach (StudentModel student in newCourse.Students)
+                {
+                    student.CourseResults[newCourse.CourseName] = collection[student.Id];
+                }
+
+                return View(newCourse);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: CourseController/Create
         public ActionResult Create()
         {
@@ -38,7 +59,7 @@ namespace mvcSchool.Controllers
 
                 newCourse.CourseName = collection["CourseName"];
                 CourseModel.AddCourse(newCourse);
-
+                
                 return RedirectToAction(nameof(Index));
             }
             catch

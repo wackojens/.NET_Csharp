@@ -16,7 +16,7 @@ namespace mvcSchool.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
-        public Dictionary<string, string> CourseResults { get; set; }/* = new Dictionary<string, string>() { { ".NET", "5" }, { "python","0" }, { "test", "" } };*/
+        public Dictionary<string, string> CourseResults { get; set; } = new(); /* = new Dictionary<string, string>() { { ".NET", "5" }, { "python", "0" }, { "test", "" } };*/
 
         public List<string> Courses = new();
 
@@ -91,6 +91,7 @@ namespace mvcSchool.Models
             {
                 if (student.Id == id)
                 {
+                    student.AddCourses();
                     return student;
                 }
             }
@@ -131,7 +132,37 @@ namespace mvcSchool.Models
                     student.Email = newStudent.Email;
                     student.Courses = newStudent.Courses;
                     student.FullName = newStudent.FullName;
+                    student.AddCourses();
+                    student.RemoveCourses();
                     break;
+                }
+            }
+        }
+
+        public void AddCourses()
+        {
+            foreach (string course in Courses)
+            {
+                string name = GetCourseName(course);
+                if (!CourseResults.ContainsKey(name))
+                {
+                    CourseResults.Add(name, "");
+                }
+            }
+        }
+
+        public void RemoveCourses()
+        {
+            List<string> courseNames = new();
+            foreach (string course in Courses)
+            {
+                courseNames.Add(GetCourseName(course));
+            }
+            foreach (KeyValuePair<string, string> courseScore in CourseResults)
+            {
+                if (!courseNames.Contains(courseScore.Key))
+                {
+                    CourseResults.Remove(courseScore.Key);
                 }
             }
         }
