@@ -1,169 +1,70 @@
-﻿using System.ComponentModel;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel;
 
 namespace mvcSchool.Models
 {
     public class StudentModel
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-        [DisplayName("test")]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [BsonElement("firstName")]
+        [DisplayName("first name")]
         public string FirstName { get; set; }
+
+        [BsonElement("lastName")]
         public string LastName { get; set; }
-        public string Birthdate { get; set; }
-        public string Gender { get; set; }
-        public string Township { get; set; }
-        public int PostalCode { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
+
+        [BsonElement("fullName")]
         public string FullName { get; set; }
-        public Dictionary<string, string> CourseResults { get; set; } = new(); /* = new Dictionary<string, string>() { { ".NET", "5" }, { "python", "0" }, { "test", "" } };*/
 
-        public List<string> Courses = new();
+        [BsonElement("birthdate")]
+        public string Birthdate { get; set; }
 
-        private static List<StudentModel> Students = new();
+        [BsonElement("gender")]
+        public string Gender { get; set; }
 
-        static StudentModel()
-        {
-            Students.Add(new StudentModel() { FirstName = "Jens", LastName = "Coomans", Birthdate = "19/01/1990", Gender = "Male", Township = "Hechtel-Eksel", PostalCode = 3990, Address = "Klaverstraat 9", PhoneNumber = "0475/358177", Email = "Jens.Coomans@outlook.be", FullName = "Jens Coomans" });
-            Students.Add(new StudentModel() { FirstName = "Dario", LastName = "Van Hasselt", Birthdate = "20/02/2002", Gender = "Male", Township = "Mol", PostalCode = 2400, Address = "Dariostraat 202", PhoneNumber = "0496/215487", Email = "Dario@xerio.com", FullName = "Dario Van Hasselt" });
-        }
+        [BsonElement("township")]
+        public string Township { get; set; }
 
-        //public void AddCourse(string courseId)
-        //{
-        //    Courses.Add(courseId);
-        //}
+        [BsonElement("postalCode")]
+        public int PostalCode { get; set; }
 
-        //public void ShowScore(string courseId, int score)
-        //{
-        //    CourseResults[courseId] = score;
-        //}
+        [BsonElement("address")]
+        public string Address { get; set; }
 
-        //public List<string> GetCourseNamesList()
-        //{
-        //    List<string> courseNames = new();
-        //    List<CourseModel> allCourses = CourseModel.GetAll();
+        [BsonElement("phoneNumber")]
+        public string PhoneNumber { get; set; }
 
-        //    var courseList = from course in allCourses
-        //                     where Courses.Contains(course.Id)
-        //                     select course.CourseName;
+        [BsonElement("email")]
+        public string Email { get; set; }
 
-        //    foreach (string course in courseList)
-        //        courseNames.Add(course);
+        [BsonElement("courseResults")]
+        public Dictionary<string, string> CourseResults { get; set; } = new();
 
-        //    return courseNames;
-        //}
-
-        //public string StringCourseNames()
-        //{
-        //    string courseNames = "";
-        //    string separator = ", ";
-        //    List<CourseModel> allCourses = CourseModel.GetAll();
-
-        //    var courseList = from course in allCourses
-        //                     where Courses.Contains(course.Id)
-        //                     select course.CourseName;
-
-        //    foreach (string course in courseList)
-        //        courseNames += course + separator;
-
-        //    courseNames = courseNames.Trim(separator.ToCharArray());
-
-        //    return courseNames;
-        //}
-
-        public string GetCourseName(string id)
-        {
-            List<CourseModel> allCourses = CourseModel.GetAll();
-
-            string name = allCourses.Where(c => c.Id == id).Select(c => c.CourseName).First();
-
-            return name;
-        }
-
-            public static List<StudentModel> GetAll()
-        {
-            return Students;
-        }
-
-        public static StudentModel GetStudent(string id)
-        {
-            foreach (StudentModel student in Students)
-            {
-                if (student.Id == id)
-                {
-                    student.AddCourses();
-                    return student;
-                }
-            }
-            return null;
-        }
-
-        public static void Delete(string id)
-        {
-            foreach (StudentModel student in Students)
-            {
-                if (student.Id == id)
-                {
-                    Students.Remove(student);
-                    break;
-                }
-            }
-        }
-
-        public static void AddStudent(StudentModel student)
-        {
-            Students.Add(student);
-        }
-
-        public static void UpdateStudent(StudentModel newStudent)
-        {
-            foreach (StudentModel student in Students)
-            {
-                if (student.Id == newStudent.Id)
-                {
-                    student.FirstName = newStudent.FirstName;
-                    student.LastName = newStudent.LastName;
-                    student.Birthdate = newStudent.Birthdate;
-                    student.Gender = newStudent.Gender;
-                    student.Township = newStudent.Township;
-                    student.PostalCode = newStudent.PostalCode;
-                    student.Address = newStudent.Address;
-                    student.PhoneNumber = newStudent.PhoneNumber;
-                    student.Email = newStudent.Email;
-                    student.Courses = newStudent.Courses;
-                    student.FullName = newStudent.FullName;
-                    student.AddCourses();
-                    student.RemoveCourses();
-                    break;
-                }
-            }
-        }
+        [BsonElement("courses")]
+        public List<CourseModel> Courses = new();
 
         public void AddCourses()
         {
-            foreach (string course in Courses)
+            foreach ( CourseModel course in Courses)
             {
-                string name = GetCourseName(course);
-                if (!CourseResults.ContainsKey(name))
-                {
-                    CourseResults.Add(name, "");
-                }
+                if (!CourseResults.ContainsKey(course.Id))
+                    CourseResults.Add(course.Id, null);
             }
         }
 
         public void RemoveCourses()
         {
-            List<string> courseNames = new();
-            foreach (string course in Courses)
+            List<string> courseIds = new();
+            foreach (CourseModel course in Courses)
+                courseIds.Add(course.Id);
+            foreach (KeyValuePair<string,string> courseScore in CourseResults)
             {
-                courseNames.Add(GetCourseName(course));
-            }
-            foreach (KeyValuePair<string, string> courseScore in CourseResults)
-            {
-                if (!courseNames.Contains(courseScore.Key))
-                {
+                if (!courseIds.Contains(courseScore.Key))
                     CourseResults.Remove(courseScore.Key);
-                }
             }
         }
     }

@@ -2,30 +2,48 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using mvcSchool.Models;
+using mvcSchool.Services;
 
 namespace mvcSchool.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly StudentService studentService;
+        private readonly CourseService courseService;
+
+        public StudentController(StudentService studentService, CourseService courseService)
+        {
+            this.studentService = studentService;
+            this.courseService = courseService;
+        }
+
         // GET: StudentController
         public ActionResult Index()
         {
-            return View(StudentModel.GetAll());
+            return View(studentService.Get());
         }
 
         // GET: StudentController/Details/5
         public ActionResult Details(string id)
         {
-            StudentModel newStudent = StudentModel.GetStudent(id);
-            //ViewData["courseNames"] = newStudent.StringCourseNames();
-            return View(newStudent);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tempStudent = studentService.Get(id);
+            if (tempStudent == null)
+            {
+                return NotFound();
+            }
+
+            return View(tempStudent);
         }
 
         // GET: StudentController/Create
         public ActionResult Create()
         {
-            List<CourseModel> courses = CourseModel.GetAll();
-            // SelectList coursesList = new SelectList(courses.Select(c => new SelectListItem { Text = c.CourseName, Value = c.Id }).ToList());
+            List<CourseModel> courses = courseService.Get();
             MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
             ViewData["courses"] = coursesList;
             return View();
@@ -39,6 +57,7 @@ namespace mvcSchool.Controllers
             try
             {
                 StudentModel newStudent = new();
+                List<string> courseIds = new();
 
                 newStudent.FirstName = collection["Firstname"];
                 newStudent.LastName = collection["LastName"];
@@ -49,13 +68,19 @@ namespace mvcSchool.Controllers
                 newStudent.Address = collection["Address"];
                 newStudent.PhoneNumber = collection["PhoneNumber"];
                 newStudent.Email = collection["Email"];
-                newStudent.Courses = collection["Courses"].ToList();
                 newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
+                
+                courseIds = collection["Courses"].ToList();
+                foreach (string courseId in courseIds)
+                {
+                    CourseModel course = courseService.Get(courseId);
+                    newStudent.Courses.Add(course);
+                }
                 newStudent.AddCourses();
+                
+                studentService.Create(newStudent);
 
-                StudentModel.AddStudent(newStudent);
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -66,10 +91,10 @@ namespace mvcSchool.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(string id)
         {
-            List<CourseModel> courses = CourseModel.GetAll();
+            List<CourseModel> courses = courseService.Get();
             MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
             ViewData["courses"] = coursesList;
-            return View(StudentModel.GetStudent(id));
+            return View(studentService.Get(id));
         }
 
         // POST: StudentController/Edit/5
@@ -79,35 +104,45 @@ namespace mvcSchool.Controllers
         {
             try
             {
-                StudentModel newStudent = new();
+                StudentModel tempStudent = studentService.Get(id);
 
-                newStudent.Id = id;
-                newStudent.FirstName = collection["Firstname"];
-                newStudent.LastName = collection["LastName"];
-                newStudent.Birthdate = collection["Birthdate"];
-                newStudent.Gender = collection["Gender"];
-                newStudent.Township = collection["Township"];
-                newStudent.PostalCode = Int32.Parse(collection["PostalCode"]);
-                newStudent.Address = collection["Address"];
-                newStudent.PhoneNumber = collection["PhoneNumber"];
-                newStudent.Email = collection["Email"];
-                newStudent.Courses = collection["Courses"].ToList();
-                newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
+                tempStudent.FirstName = collection["Firstname"];
+                tempStudent.LastName = collection["LastName"];
+                tempStudent.Birthdate = collection["Birthdate"];
+                tempStudent.Gender = collection["Gender"];
+                tempStudent.Township = collection["Township"];
+                tempStudent.PostalCode = Int32.Parse(collection["PostalCode"]);
+                tempStudent.Address = collection["Address"];
+                tempStudent.PhoneNumber = collection["PhoneNumber"];
+                tempStudent.Email = collection["Email"];
+                tempStudent.FullName = tempStudent.FirstName + " " + tempStudent.LastName;
 
-                StudentModel.UpdateStudent(newStudent);
+                tempStudent.Courses.Clear();
 
-                return RedirectToAction(nameof(Index));
-            }
+                List<string> courses = collection["Courses"].ToList();
+                foreach (string course in courses)
+                {
+                        tempStudent.Courses.Add(courseService.Get(course)); 
+                }
+
+                tempStudent.AddCourses();
+                tempStudent.RemoveCourses();
+
+                studentService.Update(id, tempStudent);
+
+                return RedirectToAction("Index");
+        }
             catch
             {
                 return View();
-            }
-        }
+    }
+}
 
         // GET: StudentController/Delete/5
         public ActionResult Delete(string id)
         {
-            StudentModel.Delete(id);
+            studentService.Remove(id);
+
             return RedirectToAction(nameof(Index));
         }
 

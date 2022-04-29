@@ -1,7 +1,12 @@
+using mvcSchool.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<StudentService>();
+builder.Services.AddScoped<TeacherService>();
+builder.Services.AddScoped<CourseService>();
 
 var app = builder.Build();
 

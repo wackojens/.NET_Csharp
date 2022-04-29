@@ -64,17 +64,17 @@
 		<dd class="col-sm-10">
 			@Html.DisplayFor(model => model.Email)
 		</dd>
-		<dt class = "col-sm-2">
+@*		<dt class = "col-sm-2">
 			@Html.DisplayNameFor(model => model.Courses)
 		</dt>
-		<dd class = "col-sm-10">
+		<dd class = "col-sm-10">*@
 			@*@ViewData["courseNames"]*@
-			@foreach (string item in Model.Courses)
+@*			@foreach (string item in Model.Courses)
 			{
 				string course = Model.GetCourseName(item);
 				@Html.DisplayFor(model => course)<br />
 			}
-		</dd>
+		</dd>*@
 	</dl>
 </div>
 <div class="col-md-4">
@@ -94,7 +94,7 @@
 			{
 				<tr>
 					<td>
-						@Html.Label("",item.Key)
+						@Html.Label("", Model.Courses.Where(c => c.Id == item.Key).Select(c => c.CourseName).First())
 					</td>
 					<td>
 						@Html.Label(item.Value)

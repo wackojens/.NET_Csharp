@@ -1,24 +1,40 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using mvcSchool.Models;
+using mvcSchool.Services;
 
 namespace mvcSchool.Controllers
 {
     public class CourseController : Controller
     {
-        // GET: CourseController
-        public ActionResult Index()
+        private readonly CourseService courseService;
+        private readonly StudentService studentService;
+
+        public CourseController(CourseService courseService, StudentService studentService)
         {
-            return View(CourseModel.GetAll());
+            this.courseService = courseService;
+            this.studentService = studentService;
         }
+
+        // GET: CourseController
+        public ActionResult Index() => View(courseService.Get());
 
         // GET: CourseController/Details/5
         public ActionResult Details(string id)
         {
-            CourseModel newCourse = CourseModel.GetCourse(id);
-            /*newCourse.CourseTeacher = */newCourse.GetTeacher();
-            newCourse.GetStudents();
-            return View(newCourse);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tempCourse = courseService.Get(id);
+            if (tempCourse == null)
+            {
+                return NotFound();
+            }
+            List<StudentModel> students = courseService.GetCourseStudents(id);
+            ViewBag.students = students;
+            return View(tempCourse);
         }
 
         // POST: CourseController/Details/5
@@ -28,13 +44,18 @@ namespace mvcSchool.Controllers
         {
             try
             {
-                CourseModel newCourse = CourseModel.GetCourse(id);
-                foreach (StudentModel student in newCourse.Students)
+                var tempCourse = courseService.Get(id);
+
+                List<StudentModel> students = courseService.GetCourseStudents(id);
+                ViewBag.students = students;
+
+                foreach (StudentModel student in ViewBag.students)
                 {
-                    student.CourseResults[newCourse.CourseName] = collection[student.Id];
+                    student.CourseResults[id] = collection[student.Id];
+                    studentService.Update(student.Id, student);
                 }
 
-                return View(newCourse);
+                return View(tempCourse);
             }
             catch
             {
@@ -58,20 +79,20 @@ namespace mvcSchool.Controllers
                 CourseModel newCourse = new();
 
                 newCourse.CourseName = collection["CourseName"];
-                CourseModel.AddCourse(newCourse);
+                courseService.Create(newCourse);
                 
-                return RedirectToAction(nameof(Index));
-            }
+                return RedirectToAction("Index");
+        }
             catch
             {
                 return View();
-            }
-        }
+    }
+}
 
         // GET: CourseController/Edit/5
         public ActionResult Edit(string id)
         {
-            return View(CourseModel.GetCourse(id));
+            return View(courseService.Get(id));
         }
 
         // POST: CourseController/Edit/5
@@ -86,7 +107,7 @@ namespace mvcSchool.Controllers
                 newCourse.Id = id;
                 newCourse.CourseName = collection["CourseName"];
 
-                CourseModel.UpdateCourse(newCourse);
+                courseService.Update(id, newCourse);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -99,23 +120,23 @@ namespace mvcSchool.Controllers
         // GET: CourseController/Delete/5
         public ActionResult Delete(string id)
         {
-            CourseModel.Delete(id);
+            courseService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: CourseController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: CourseController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
