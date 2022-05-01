@@ -45,5 +45,26 @@ namespace mvcSchool.Services
         {
             students.DeleteOne(student => student.Id == id);
         }
+
+        public void AddCourses(StudentModel student)
+        {
+            foreach (CourseModel course in student.Courses)
+            {
+                if (!student.CourseResults.ContainsKey(course.Id))
+                    student.CourseResults.Add(course.Id, null);
+            }
+        }
+
+        public void RemoveCourses(StudentModel student)
+        {
+            List<string> courseIds = new();
+            foreach (CourseModel course in student.Courses)
+                courseIds.Add(course.Id);
+            foreach (KeyValuePair<string, string> courseScore in student.CourseResults)
+            {
+                if (!courseIds.Contains(courseScore.Key))
+                    student.CourseResults.Remove(courseScore.Key);
+            }
+        }
     }
 }

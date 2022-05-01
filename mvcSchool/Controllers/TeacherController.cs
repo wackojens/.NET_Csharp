@@ -87,8 +87,8 @@ namespace mvcSchool.Controllers
         public ActionResult Edit(string id)
         {
             List<CourseModel> courses = courseService.Get();
-            MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
-            ViewData["courses"] = coursesList;
+            MultiSelectList courseList = new MultiSelectList(courses, "Id", "CourseName");
+            ViewData["courses"] = courseList;
             return View(teacherService.Get(id));
         }
 

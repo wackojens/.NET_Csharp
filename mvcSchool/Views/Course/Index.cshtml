@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => /*model.CourseTeacher*/ model.Teacher)
+                @Html.Label("Teacher")
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,16 @@
                 @Html.DisplayFor(modelItem => item.CourseName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => /*item.CourseTeacher*/ item.Teacher.FullName)
+                    @foreach (TeacherModel teacher in ViewBag.teachers)
+                    {
+                        foreach (CourseModel course in teacher.Courses)
+                        {
+                            if (course.Id == item.Id)
+                            {
+                                @teacher.FullName
+                            }
+                        }
+                    }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

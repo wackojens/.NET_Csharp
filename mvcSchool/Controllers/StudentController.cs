@@ -76,7 +76,7 @@ namespace mvcSchool.Controllers
                     CourseModel course = courseService.Get(courseId);
                     newStudent.Courses.Add(course);
                 }
-                newStudent.AddCourses();
+                studentService.AddCourses(newStudent);
                 
                 studentService.Create(newStudent);
 
@@ -125,18 +125,18 @@ namespace mvcSchool.Controllers
                         tempStudent.Courses.Add(courseService.Get(course)); 
                 }
 
-                tempStudent.AddCourses();
-                tempStudent.RemoveCourses();
+                studentService.AddCourses(tempStudent);
+                studentService.RemoveCourses(tempStudent);
 
                 studentService.Update(id, tempStudent);
 
                 return RedirectToAction("Index");
-        }
+            }
             catch
             {
                 return View();
-    }
-}
+            }
+        }
 
         // GET: StudentController/Delete/5
         public ActionResult Delete(string id)

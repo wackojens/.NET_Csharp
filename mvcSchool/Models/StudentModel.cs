@@ -11,10 +11,11 @@ namespace mvcSchool.Models
         public string Id { get; set; }
 
         [BsonElement("firstName")]
-        [DisplayName("first name")]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
 
         [BsonElement("lastName")]
+        [DisplayName("Last name")]
         public string LastName { get; set; }
 
         [BsonElement("fullName")]
@@ -30,12 +31,14 @@ namespace mvcSchool.Models
         public string Township { get; set; }
 
         [BsonElement("postalCode")]
+        [DisplayName("Postal code")]
         public int PostalCode { get; set; }
 
         [BsonElement("address")]
         public string Address { get; set; }
 
         [BsonElement("phoneNumber")]
+        [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
 
         [BsonElement("email")]
@@ -46,26 +49,5 @@ namespace mvcSchool.Models
 
         [BsonElement("courses")]
         public List<CourseModel> Courses = new();
-
-        public void AddCourses()
-        {
-            foreach ( CourseModel course in Courses)
-            {
-                if (!CourseResults.ContainsKey(course.Id))
-                    CourseResults.Add(course.Id, null);
-            }
-        }
-
-        public void RemoveCourses()
-        {
-            List<string> courseIds = new();
-            foreach (CourseModel course in Courses)
-                courseIds.Add(course.Id);
-            foreach (KeyValuePair<string,string> courseScore in CourseResults)
-            {
-                if (!courseIds.Contains(courseScore.Key))
-                    CourseResults.Remove(courseScore.Key);
-            }
-        }
     }
 }

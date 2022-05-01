@@ -68,11 +68,11 @@
             @Html.DisplayNameFor(model => model.Courses)
         </dt>
         <dd class = "col-sm-10">
-@*            @foreach (string item in Model.Courses)
+            @foreach (CourseModel item in Model.Courses)
             {
-                string course = Model.GetCourseName(item);
-                <div>@Html.ActionLink(course, "Details", "Course", new { id=item }, null)</div>
-            }*@
+                string course = item.CourseName;
+                <div>@Html.ActionLink(course, "Details", "Course", new { id=item.Id }, null)</div>
+            }
         </dd>
     </dl>
 </div>

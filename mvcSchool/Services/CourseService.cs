@@ -48,6 +48,7 @@ namespace mvcSchool.Services
                         "$eq", ObjectId.Parse(id)))),
             };
             students.UpdateMany(x => true, updateStudent, new UpdateOptions {ArrayFilters = arrayFiltersStudent});
+
             var updateTeacher = Builders<TeacherModel>.Update.Set("courses.$[c].courseName", tempCourse.CourseName);
 
             var arrayFiltersTeacher = new[]
@@ -88,6 +89,16 @@ namespace mvcSchool.Services
             {
                 return new List<StudentModel>();
             }
+        }
+
+        public TeacherModel GetCourseTeacher(string id)
+        {
+            CourseModel course = courses.Find(course => course.Id == id).FirstOrDefault();
+            TeacherModel teacher = teachers.Find(t => t.Courses.Contains(course)).FirstOrDefault();
+            if (teacher != null)
+                return teacher;
+            else
+                return new TeacherModel();
         }
     }
 }

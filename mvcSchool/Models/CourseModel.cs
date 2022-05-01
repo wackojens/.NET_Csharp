@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using mvcSchool.Services;
+using System.ComponentModel;
 
 namespace mvcSchool.Models
 {
@@ -11,9 +12,7 @@ namespace mvcSchool.Models
         public string Id { get; set; }
 
         [BsonElement("courseName")]
+        [DisplayName("Course")]
         public string CourseName { get; set; }
-
-        [BsonElement("teacher")]
-        public TeacherModel Teacher = null;
     }
 }

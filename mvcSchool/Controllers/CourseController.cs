@@ -9,15 +9,21 @@ namespace mvcSchool.Controllers
     {
         private readonly CourseService courseService;
         private readonly StudentService studentService;
+        private readonly TeacherService teacherService;
 
-        public CourseController(CourseService courseService, StudentService studentService)
+        public CourseController(CourseService courseService, StudentService studentService, TeacherService teacherService)
         {
             this.courseService = courseService;
             this.studentService = studentService;
+            this.teacherService = teacherService;
         }
 
         // GET: CourseController
-        public ActionResult Index() => View(courseService.Get());
+        public ActionResult Index()
+        {
+            ViewBag.teachers = teacherService.Get();
+            return View(courseService.Get());
+        }
 
         // GET: CourseController/Details/5
         public ActionResult Details(string id)
@@ -34,6 +40,9 @@ namespace mvcSchool.Controllers
             }
             List<StudentModel> students = courseService.GetCourseStudents(id);
             ViewBag.students = students;
+            TeacherModel teacher = courseService.GetCourseTeacher(id);
+            ViewBag.teacher = teacher;
+
             return View(tempCourse);
         }
 
@@ -46,10 +55,13 @@ namespace mvcSchool.Controllers
             {
                 var tempCourse = courseService.Get(id);
 
+
                 List<StudentModel> students = courseService.GetCourseStudents(id);
                 ViewBag.students = students;
+                TeacherModel teacher = courseService.GetCourseTeacher(id);
+                ViewBag.teacher = teacher;
 
-                foreach (StudentModel student in ViewBag.students)
+                foreach (StudentModel student in students)
                 {
                     student.CourseResults[id] = collection[student.Id];
                     studentService.Update(student.Id, student);
@@ -102,12 +114,12 @@ namespace mvcSchool.Controllers
         {
             try
             {
-                CourseModel newCourse = new();
+                CourseModel tempCourse = new();
 
-                newCourse.Id = id;
-                newCourse.CourseName = collection["CourseName"];
+                tempCourse.Id = id;
+                tempCourse.CourseName = collection["CourseName"];
 
-                courseService.Update(id, newCourse);
+                courseService.Update(id, tempCourse);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -124,19 +136,19 @@ namespace mvcSchool.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //// POST: CourseController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        // POST: CourseController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
