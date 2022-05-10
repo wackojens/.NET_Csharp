@@ -21,8 +21,16 @@ namespace mvcSchool.Controllers
         // GET: CourseController
         public ActionResult Index()
         {
-            ViewBag.teachers = teacherService.Get();
-            return View(courseService.Get());
+            Dictionary<string, string> courseTeacher = new();
+            List<CourseModel> courses = courseService.Get();
+
+            foreach (CourseModel course in courses)
+            {
+                TeacherModel teacher = courseService.GetCourseTeacher(course.Id);
+                courseTeacher.Add(course.Id, teacher.FullName);
+            }
+            ViewBag.teachers = courseTeacher;
+            return View(courses);
         }
 
         // GET: CourseController/Details/5
@@ -67,7 +75,7 @@ namespace mvcSchool.Controllers
                     studentService.Update(student.Id, student);
                 }
 
-                return View(tempCourse);
+                return RedirectToAction("Index");
             }
             catch
             {

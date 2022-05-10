@@ -37,6 +37,14 @@ namespace mvcSchool.Controllers
                 return NotFound();
             }
 
+            Dictionary<string,string> courses = new();
+            foreach(string courseId in tempStudent.CourseResults.Keys)
+            {
+                CourseModel course = courseService.Get(courseId);
+                courses.Add(course.CourseName, tempStudent.CourseResults[courseId]);
+            }
+            ViewBag.courses = courses;
+
             return View(tempStudent);
         }
 
@@ -70,13 +78,8 @@ namespace mvcSchool.Controllers
                 newStudent.Email = collection["Email"];
                 newStudent.FullName = newStudent.FirstName + " " + newStudent.LastName;
                 
-                courseIds = collection["Courses"].ToList();
-                foreach (string courseId in courseIds)
-                {
-                    CourseModel course = courseService.Get(courseId);
-                    newStudent.Courses.Add(course);
-                }
-                studentService.AddCourses(newStudent);
+                courseIds = collection["CourseResults.Keys"].ToList();
+                studentService.AddCourses(courseIds, newStudent);
                 
                 studentService.Create(newStudent);
 
@@ -94,7 +97,8 @@ namespace mvcSchool.Controllers
             List<CourseModel> courses = courseService.Get();
             MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
             ViewData["courses"] = coursesList;
-            return View(studentService.Get(id));
+            StudentModel student = studentService.Get(id);
+            return View(student);
         }
 
         // POST: StudentController/Edit/5
@@ -117,17 +121,10 @@ namespace mvcSchool.Controllers
                 tempStudent.Email = collection["Email"];
                 tempStudent.FullName = tempStudent.FirstName + " " + tempStudent.LastName;
 
-                tempStudent.Courses.Clear();
+                List<string> courseIds = collection["CourseResults.Keys"].ToList();
 
-                List<string> courses = collection["Courses"].ToList();
-                foreach (string course in courses)
-                {
-                        tempStudent.Courses.Add(courseService.Get(course)); 
-                }
-
-                studentService.AddCourses(tempStudent);
-                studentService.RemoveCourses(tempStudent);
-
+                studentService.AddCourses(courseIds, tempStudent);
+                studentService.RemoveCourses(courseIds, tempStudent);
                 studentService.Update(id, tempStudent);
 
                 return RedirectToAction("Index");

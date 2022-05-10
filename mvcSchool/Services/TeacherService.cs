@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using mvcSchool.Models;
 
 namespace mvcSchool.Services
@@ -7,10 +8,10 @@ namespace mvcSchool.Services
     {
         private readonly IMongoCollection<TeacherModel> teachers;
 
-        public TeacherService(IConfiguration config)
+        public TeacherService(IOptions<mvcSchoolDBModel> dbSettings)
         {
-            MongoClient client = new MongoClient("mongodb+srv://m001-student:m001-mongodb-basics@sandbox.4d5t5.mongodb.net/Sandbox?retryWrites=true&w=majority");
-            IMongoDatabase database = client.GetDatabase("mvcSchool");
+            MongoClient client = new MongoClient(dbSettings.Value.ConnectionString);
+            IMongoDatabase database = client.GetDatabase(dbSettings.Value.DatabaseName);
             teachers = database.GetCollection<TeacherModel>("Teachers");
         }
 
@@ -44,5 +45,25 @@ namespace mvcSchool.Services
         {
             teachers.DeleteOne(teacher => teacher.Id == id);
         }
+
+        public List<CourseModel> freeCourses(List<CourseModel> allCourses, List<TeacherModel> allTeachers)
+        {
+            List<CourseModel> selectedCourses = new();
+
+            foreach (CourseModel course in allCourses)
+            {
+                foreach (TeacherModel teacher in allTeachers)
+                {
+                    if (teacher.Courses.Contains(course.Id))
+                        selectedCourses.Add(course);
+                }
+            }
+            foreach (CourseModel selectedCourse in selectedCourses)
+            {
+                allCourses.Remove(selectedCourse);
+            }
+
+            return allCourses;
+        } 
     }
 }

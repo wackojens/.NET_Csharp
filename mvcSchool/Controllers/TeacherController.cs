@@ -34,6 +34,14 @@ namespace mvcSchool.Controllers
                 return NotFound();
             }
 
+            List<CourseModel> courses = new();
+            foreach (string courseId in tempTeacher.Courses)
+            {
+                CourseModel course = courseService.Get(courseId);
+                courses.Add(course);
+            }
+            ViewBag.courses = courses;
+
             return View(tempTeacher);
         }
 
@@ -41,7 +49,10 @@ namespace mvcSchool.Controllers
         public ActionResult Create()
         {
             List<CourseModel> courses = courseService.Get();
-            MultiSelectList coursesList = new MultiSelectList(courses, "Id", "CourseName");
+            List<TeacherModel> teachers = teacherService.Get();
+            List<CourseModel> freeCourses = teacherService.freeCourses(courses, teachers);
+
+            MultiSelectList coursesList = new MultiSelectList(freeCourses, "Id", "CourseName");
             ViewData["courses"] = coursesList;
             return View();
         }
@@ -66,12 +77,7 @@ namespace mvcSchool.Controllers
                 newTeacher.Email = collection["Email"];
                 newTeacher.FullName = newTeacher.FirstName + " " + newTeacher.LastName;
 
-                List<string> courseIds = collection["Courses"].ToList();
-                foreach (string courseId in courseIds)
-                {
-                    CourseModel course = courseService.Get(courseId);
-                    newTeacher.Courses.Add(course);
-                }
+                newTeacher.Courses = collection["Courses"].ToList();
 
                 teacherService.Create(newTeacher);
 
@@ -115,11 +121,7 @@ namespace mvcSchool.Controllers
 
                 tempTeacher.Courses.Clear();
 
-                List<string> courses = collection["Courses"].ToList();
-                foreach (string course in courses)
-                {
-                    tempTeacher.Courses.Add(courseService.Get(course));
-                }
+                tempTeacher.Courses = collection["Courses"].ToList();
 
                 teacherService.Update(id, tempTeacher);
 

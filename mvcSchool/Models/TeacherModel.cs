@@ -45,6 +45,7 @@ namespace mvcSchool.Models
         public string FullName { get; set; }
 
         [BsonElement("courses")]
-        public List<CourseModel> Courses = new();
+        [BsonRepresentation(BsonType.ObjectId)]
+        public List<string> Courses = new();
     }
 }

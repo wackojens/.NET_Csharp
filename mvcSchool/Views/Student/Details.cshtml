@@ -80,11 +80,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var item in Model.CourseResults)
+				@foreach (var item in ViewBag.courses)
 				{
 					<tr>
 						<td>
-							@Html.Label("", Model.Courses.Where(c => c.Id == item.Key).Select(c => c.CourseName).First())
+							@item.Key
 						</td>
 						<td>
 							@item.Value

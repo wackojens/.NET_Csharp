@@ -68,11 +68,15 @@
             @Html.DisplayNameFor(model => model.Courses)
         </dt>
         <dd class = "col-sm-10">
-            @foreach (CourseModel item in Model.Courses)
+            @foreach(CourseModel course in ViewBag.courses)
+            {
+                <div>@Html.ActionLink(course.CourseName, "Details", "Course", new { id=course.Id}, null)</div>
+            }
+@*            @foreach (CourseModel item in Model.Courses)
             {
                 string course = item.CourseName;
                 <div>@Html.ActionLink(course, "Details", "Course", new { id=item.Id }, null)</div>
-            }
+            }*@
         </dd>
     </dl>
 </div>

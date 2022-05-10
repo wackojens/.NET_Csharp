@@ -1,3 +1,4 @@
+using mvcSchool.Models;
 using mvcSchool.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<TeacherService>();
 builder.Services.AddScoped<CourseService>();
+builder.Services.Configure<mvcSchoolDBModel>(builder.Configuration.GetSection("mvcSchoolDB"));
 
 var app = builder.Build();
 

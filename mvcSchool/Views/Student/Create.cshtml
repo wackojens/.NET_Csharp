@@ -42,8 +42,8 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="col-md-4">
-        <label asp-for="Courses" class="control-label">Courses</label><br />
-        @Html.ListBoxFor(model => model.Courses, (MultiSelectList)ViewData["Courses"], new { multiple = "multiple", @class= "listbox" })
+        <label asp-for="CourseResults" class="control-label">Courses</label><br />
+        @Html.ListBoxFor(model => model.CourseResults.Keys, (MultiSelectList)ViewData["Courses"], new { multiple = "multiple", @class= "listbox" })
     </div>
     <div class="col-12">
         <a asp-action="Index" class="btn btn-primary float-end" style="margin-left:10px;">Back</a>

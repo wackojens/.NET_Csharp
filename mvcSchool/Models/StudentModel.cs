@@ -46,8 +46,5 @@ namespace mvcSchool.Models
 
         [BsonElement("courseResults")]
         public Dictionary<string, string> CourseResults { get; set; } = new();
-
-        [BsonElement("courses")]
-        public List<CourseModel> Courses = new();
     }
 }

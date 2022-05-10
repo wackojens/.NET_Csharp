@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using mvcSchool.Models;
 
 namespace mvcSchool.Services
@@ -7,10 +8,10 @@ namespace mvcSchool.Services
     {
         private readonly IMongoCollection<StudentModel> students;
 
-        public StudentService(IConfiguration config)
+        public StudentService(IOptions<mvcSchoolDBModel> dbSettings)
         {
-            MongoClient client = new MongoClient("mongodb+srv://m001-student:m001-mongodb-basics@sandbox.4d5t5.mongodb.net/Sandbox?retryWrites=true&w=majority");
-                    IMongoDatabase database = client.GetDatabase("mvcSchool");
+            MongoClient client = new MongoClient(dbSettings.Value.ConnectionString);
+            IMongoDatabase database = client.GetDatabase(dbSettings.Value.DatabaseName);
             students = database.GetCollection<StudentModel>("Students");
         }
 
@@ -46,20 +47,17 @@ namespace mvcSchool.Services
             students.DeleteOne(student => student.Id == id);
         }
 
-        public void AddCourses(StudentModel student)
+        public void AddCourses(List<string> courseIds, StudentModel student)
         {
-            foreach (CourseModel course in student.Courses)
+            foreach (string courseId in courseIds)
             {
-                if (!student.CourseResults.ContainsKey(course.Id))
-                    student.CourseResults.Add(course.Id, null);
+                if (!student.CourseResults.ContainsKey(courseId))
+                    student.CourseResults.Add(courseId, null);
             }
         }
 
-        public void RemoveCourses(StudentModel student)
+        public void RemoveCourses(List<string> courseIds, StudentModel student)
         {
-            List<string> courseIds = new();
-            foreach (CourseModel course in student.Courses)
-                courseIds.Add(course.Id);
             foreach (KeyValuePair<string, string> courseScore in student.CourseResults)
             {
                 if (!courseIds.Contains(courseScore.Key))

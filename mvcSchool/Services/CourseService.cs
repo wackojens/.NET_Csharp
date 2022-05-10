@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using mvcSchool.Models;
 
@@ -10,10 +11,10 @@ namespace mvcSchool.Services
         private readonly IMongoCollection<StudentModel> students;
         private readonly IMongoCollection<TeacherModel> teachers;
 
-        public CourseService(IConfiguration config)
+        public CourseService(IOptions<mvcSchoolDBModel> dbSettings)
         {
-            MongoClient client = new MongoClient("mongodb+srv://m001-student:m001-mongodb-basics@sandbox.4d5t5.mongodb.net/Sandbox?retryWrites=true&w=majority");
-                    IMongoDatabase database = client.GetDatabase("mvcSchool");
+            MongoClient client = new MongoClient(dbSettings.Value.ConnectionString);
+            IMongoDatabase database = client.GetDatabase(dbSettings.Value.DatabaseName);
             courses = database.GetCollection<CourseModel>("Courses");
             students = database.GetCollection<StudentModel>("Students");
             teachers = database.GetCollection<TeacherModel>("Teachers");
@@ -39,25 +40,25 @@ namespace mvcSchool.Services
         {
             courses.ReplaceOne(course => course.Id == id, tempCourse);
 
-            var updateStudent = Builders<StudentModel>.Update.Set("courses.$[c].courseName", tempCourse.CourseName);
+            //var updateStudent = Builders<StudentModel>.Update.Set("courses.$[c].courseName", tempCourse.CourseName);
 
-            var arrayFiltersStudent = new[]
-            {
-                new BsonDocumentArrayFilterDefinition<BsonDocument>(
-                    new BsonDocument("c._id", new BsonDocument(
-                        "$eq", ObjectId.Parse(id)))),
-            };
-            students.UpdateMany(x => true, updateStudent, new UpdateOptions {ArrayFilters = arrayFiltersStudent});
+            //var arrayFiltersStudent = new[]
+            //{
+            //    new BsonDocumentArrayFilterDefinition<BsonDocument>(
+            //        new BsonDocument("c._id", new BsonDocument(
+            //            "$eq", ObjectId.Parse(id)))),
+            //};
+            //students.UpdateMany(x => true, updateStudent, new UpdateOptions {ArrayFilters = arrayFiltersStudent});
 
-            var updateTeacher = Builders<TeacherModel>.Update.Set("courses.$[c].courseName", tempCourse.CourseName);
+            //var updateTeacher = Builders<TeacherModel>.Update.Set("courses.$[c].courseName", tempCourse.CourseName);
 
-            var arrayFiltersTeacher = new[]
-            {
-                new BsonDocumentArrayFilterDefinition<BsonDocument>(
-                    new BsonDocument("c._id", new BsonDocument(
-                        "$eq", ObjectId.Parse(id)))),
-            };
-            teachers.UpdateMany(x => true, updateTeacher, new UpdateOptions { ArrayFilters = arrayFiltersTeacher});
+            //var arrayFiltersTeacher = new[]
+            //{
+            //    new BsonDocumentArrayFilterDefinition<BsonDocument>(
+            //        new BsonDocument("c._id", new BsonDocument(
+            //            "$eq", ObjectId.Parse(id)))),
+            //};
+            //teachers.UpdateMany(x => true, updateTeacher, new UpdateOptions { ArrayFilters = arrayFiltersTeacher});
         }
 
         //public void Remove(CourseModel tempCourse)
@@ -67,14 +68,15 @@ namespace mvcSchool.Services
 
         public void Remove(string id)
         {
-            var pullCourseStudent = Builders<StudentModel>.Update.PullFilter(s => s.Courses, c => c.Id == id );
+            //var pullCourseStudent = Builders<StudentModel>.Update.PullFilter(s => s.Courses, c => c.Id == id );
             var unsetCourseStudent = Builders<StudentModel>.Update.Unset("courseResults." + id);
-            var removeCourseStudent = Builders<StudentModel>.Update.Combine(pullCourseStudent, unsetCourseStudent);
+            //var removeCourseStudent = Builders<StudentModel>.Update.Combine(pullCourseStudent, unsetCourseStudent);
 
-            var pullCourseTeacher = Builders<TeacherModel>.Update.PullFilter(s => s.Courses, c => c.Id == id);
+            var removeCourse = new List<string> { id };
+            var pullCourseTeacher = Builders<TeacherModel>.Update.PullFilter(t => t.Courses, c => removeCourse.Contains(c));
 
             teachers.UpdateMany(x => true, pullCourseTeacher);
-            students.UpdateMany(x => true, removeCourseStudent);
+            students.UpdateMany(x => true, unsetCourseStudent);
             courses.DeleteOne(course => course.Id == id);
         }
 
@@ -94,7 +96,7 @@ namespace mvcSchool.Services
         public TeacherModel GetCourseTeacher(string id)
         {
             CourseModel course = courses.Find(course => course.Id == id).FirstOrDefault();
-            TeacherModel teacher = teachers.Find(t => t.Courses.Contains(course)).FirstOrDefault();
+            TeacherModel teacher = teachers.Find(t => t.Courses.Contains(course.Id)).FirstOrDefault();
             if (teacher != null)
                 return teacher;
             else
